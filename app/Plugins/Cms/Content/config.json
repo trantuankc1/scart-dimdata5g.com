@@ -1,0 +1,12 @@
+{
+    "name": "Cms content module",
+    "image": "images/logo.jpg",
+    "auth": "S-Cart",
+    "email": "support@s-cart.org",
+    "link": "https://S-Cart.Org",
+    "configGroup": "Plugins",
+    "configCode": "Cms",
+    "configKey": "Content",
+    "version": "5.4",
+    "scartVersion": "7.1|7.2"
+}

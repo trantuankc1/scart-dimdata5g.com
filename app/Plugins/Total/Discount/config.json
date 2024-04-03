@@ -1,0 +1,12 @@
+{
+    "name": "Discount module",
+    "image": "images/discount.jpg",
+    "auth": "S-Cart",
+    "email": "support@s-cart.org",
+    "link": "https://S-Cart.Org",
+    "configGroup": "Plugins",
+    "configCode": "Total",
+    "configKey": "Discount",
+    "version": "2.1",
+    "scartVersion": "7.1|7.2"
+}

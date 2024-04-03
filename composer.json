@@ -1,0 +1,69 @@
+{
+    "name": "s-cart/s-cart",
+    "description": "Free Laravel e-commerce for business: shopping cart, cms content, and more...",
+    "keywords": ["Laravel ecommerce","SCart ecommerce", "SCart open source", "Free Shopping cart", "Laravel multiple vendor", "Laravel marketplace", "Laravel multiple store",  "S-Cart"],
+    "homepage": "https://s-cart.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Lanh Le",
+            "email": "lanhktc@gmail.com"
+        }
+    ],
+    "type" : "project",
+    "require": {
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "s-cart/core": "~8.0.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.18",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.0",
+        "spatie/laravel-ignition": "^2.0",
+        "barryvdh/laravel-debugbar": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+            ]
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+
+}

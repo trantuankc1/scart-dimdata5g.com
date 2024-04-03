@@ -1,0 +1,12 @@
+{
+    "name": "Cash module",
+    "image": "images/logo.png",
+    "auth": "Lanh Le",
+    "email": "lanhktc@gmail.com",
+    "link": "https://S-Cart.Org",
+    "configGroup": "Plugins",
+    "configCode": "Payment",
+    "configKey": "Cash",
+    "version": "1.2",
+    "scartVersion": "7.1|7.2"
+}
