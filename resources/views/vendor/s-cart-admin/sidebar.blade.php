@@ -1,8 +1,8 @@
    <!-- Main Sidebar Container -->
    <aside class="main-sidebar sidebar-light-pink elevation-4 sidebar-no-expand">
     <!-- Brand Logo -->
-    <a href="{{ sc_route_admin('admin.home') }}" class="brand-link navbar-secondary"">
-      {!! sc_config_admin('ADMIN_LOGO') !!}
+    <a href="{{ sc_route_admin('admin.home') }}" class="brand-link navbar-secondary">
+      Simdata5g.com
     </a>
 
     <!-- Sidebar -->
