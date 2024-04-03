@@ -6,6 +6,7 @@ use App\Plugins\Payment\VnpayBasic\AppConfig;
 use SCart\Core\Front\Models\ShopOrder;
 use SCart\Core\Front\Controllers\ShopCartController;
 use SCart\Core\Front\Controllers\RootFrontController;
+
 class FrontController extends RootFrontController
 {
     public $plugin;
@@ -16,18 +17,20 @@ class FrontController extends RootFrontController
         $this->plugin = new AppConfig;
     }
 
-    public function index() {
+    public function index()
+    {
         //
     }
 
-    public function processOrder(){
+    public function processOrder()
+    {
 
-        $dataOrder = session('dataOrder')?? [];
+        $dataOrder = session('dataOrder') ?? [];
         $currency = $dataOrder['currency'] ?? '';
 
         //Validate currency
-        if(!in_array($currency, $this->plugin->currencyAllow)) {
-            $msg = sc_language_render($this->plugin->pathPlugin.'::lang.currency_only_allow', ['list' => implode(',', $this->plugin->currencyAllow)]);
+        if (!in_array($currency, $this->plugin->currencyAllow)) {
+            $msg = sc_language_render($this->plugin->pathPlugin . '::lang.currency_only_allow', ['list' => implode(',', $this->plugin->currencyAllow)]);
             return redirect(sc_route('cart'))->with(['error' => $msg]);
         }
         //Validate order id exist
@@ -37,13 +40,14 @@ class FrontController extends RootFrontController
             return redirect(sc_route('cart'))
                 ->with(['error' => sc_language_render('cart.order_not_found')]);
         }
-        
+
     }
 
     /**
      * Process data before send to vnpay
      */
-    public function prepareDataBeforeSend() {
+    public function prepareDataBeforeSend()
+    {
         $vnp_Url = $this->plugin->urlApi;
         $vnp_HashSecret = $this->plugin->getSecretKey();
         $dataOrder = session('dataOrder') ?? [];
@@ -102,70 +106,104 @@ class FrontController extends RootFrontController
     /**
      * Process order info response in page redirect
      */
-    public function processResponse() {
+    public function processResponse()
+    {
         $customer = session('customer');
         $orderID = session('orderID');
-        // Check order id response
-        if(!$orderID) {
-            $msg = sc_language_render($this->plugin->pathPlugin.'::lang.process_invalid');
+
+        // Kiểm tra order id response
+        if (!$orderID) {
+            $msg = sc_language_render($this->plugin->pathPlugin . '::lang.process_invalid');
             return redirect(sc_route('cart'))->with(['error' => $msg]);
         }
+
         $dataResponse = request()->all();
 
-        //Cancel
-        if($dataResponse['vnp_ResponseCode'] === '24') {
+        // Kiểm tra mã lỗi phản hồi
+        if ($dataResponse['vnp_ResponseCode'] === '24') {
+            // Trường hợp hủy
             return redirect(sc_route('cart'));
         }
-        //Error 
-        if($dataResponse['vnp_ResponseCode'] !== '00') {
-            $msg = sc_language_render($this->plugin->pathPlugin.'::lang.error_number', ['code' => $dataResponse['vnp_ResponseCode']]);
+
+        // Kiểm tra mã lỗi
+        if ($dataResponse['vnp_ResponseCode'] !== '00') {
+            $msg = sc_language_render($this->plugin->pathPlugin . '::lang.error_number', ['code' => $dataResponse['vnp_ResponseCode']]);
             return redirect(sc_route('cart'))->with(['error' => $msg]);
         }
 
-        //Success
-        if($dataResponse['vnp_ResponseCode'] === '00') {
-            $vnpBankTranNo = $dataResponse['vnp_BankTranNo'];
+        // Kiểm tra phản hồi thành công
+        if ($dataResponse['vnp_ResponseCode'] === '00') {
+            // Tạo chuỗi hash từ dữ liệu phản hồi
+            $secureHashData = '';
+            foreach ($dataResponse as $key => $value) {
+                if ($key !== 'vnp_SecureHash' && $key !== 'vnp_SecureHashType') {
+                    $secureHashData .= '&' . $key . '=' . $value;
+                }
+            }
+
+            // Tạo mã hash từ dữ liệu phản hồi và so sánh với vnp_SecureHash
             $vnpSecureHash = $dataResponse['vnp_SecureHash'];
-            unset($dataResponse['vnp_SecureHashType']);
-            unset($dataResponse['vnp_SecureHash']);
-            ksort($dataResponse);
+            $vnp_HashSecret = $this->plugin->getSecretKey();
+
+            $vnp_SecureHash = $_GET['vnp_SecureHash'];
+            $inputData = array();
+            foreach ($_GET as $key => $value) {
+                if (substr($key, 0, 4) == "vnp_") {
+                    $inputData[$key] = $value;
+                }
+            }
+
+            unset($inputData['vnp_SecureHash']);
+            ksort($inputData);
             $i = 0;
             $hashData = "";
-            foreach ($dataResponse as $key => $value) {
+            foreach ($inputData as $key => $value) {
                 if ($i == 1) {
-                    $hashData = $hashData . '&' . $key . "=" . $value;
+                    $hashData = $hashData . '&' . urlencode($key) . "=" . urlencode($value);
                 } else {
-                    $hashData = $hashData . $key . "=" . $value;
+                    $hashData = $hashData . urlencode($key) . "=" . urlencode($value);
                     $i = 1;
                 }
             }
-            //Compare vnpSecureHash
-            $secureHash = hash('sha256',$this->plugin->getSecretKey() . $hashData);
-            if($secureHash !== $vnpSecureHash) {
-                $msg = sc_language_render($this->plugin->pathPlugin.'::lang.process_invalid');
+
+            $secureHash = hash_hmac('sha512', $hashData, $vnp_HashSecret);
+            if ($secureHash == $vnp_SecureHash) {
+                if ($_GET['vnp_ResponseCode'] == '00') {
+                    echo "GD Thanh cong";
+                }
+                else {
+                    echo "GD Khong thanh cong";
+                }
+            } else {
+                echo "Chu ky khong hop le";
+            }
+
+            if ($secureHash !== $vnpSecureHash) {
+                $msg = sc_language_render($this->plugin->pathPlugin . '::lang.process_invalid');
                 return redirect(sc_route('cart'))->with(['error' => $msg]);
             }
 
+            // Cập nhật trạng thái đơn hàng
             ShopOrder::find($orderID)->update([
-                'transaction' => $dataResponse['vnp_BankTranNo'], 
+                'transaction' => $dataResponse['vnp_BankTranNo'],
                 'status' => sc_config('vnpay_order_status_success', 2),
                 'payment_status' => sc_config('vnpay_payment_status', 3)
-                ]);
+            ]);
 
-            //Add history
+            // Thêm lịch sử đơn hàng
             $dataHistory = [
                 'order_id' => $orderID,
-                'content' => 'Transaction ' . $vnpBankTranNo,
+                'content' => 'Transaction ' . $dataResponse['vnp_BankTranNo'],
                 'customer_id' => $customer->id ?? 0,
                 'order_status_id' => sc_config('vnpay_order_status_success', 2),
             ];
             (new ShopOrder)->addOrderHistory($dataHistory);
-            //Complete order
 
+            // Hoàn tất đơn hàng
             return (new ShopCartController)->completeOrder();
-
         }
     }
+
 
     /**
      * Process IPN

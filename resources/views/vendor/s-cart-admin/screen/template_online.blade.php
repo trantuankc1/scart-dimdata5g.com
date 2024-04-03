@@ -17,9 +17,6 @@
           <li class="nav-item">
             <a class="nav-link" target=_new  href="{{ sc_route_admin('admin_template.import') }}" ><span><i class="fas fa-save"></i> {{ sc_language_render('admin.plugin.import_data', ['data' => 'template']) }}</span></a>
           </li>
-          <li class="btn-group float-right m-2">
-            {!! sc_language_render('admin.template.template_more') !!}
-          </li>
         </ul>
       </div>
 
@@ -33,7 +30,6 @@
               </select>
               <select class="form-control" name="filter_type">
                 <option value="">Choose filter</option>
-                <option value="download" {{ ($filter_type == 'download') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_download') }}</option>
                 <option value="rating" {{ ($filter_type == 'rating') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_rating') }}</option>
                 <option value="sort_price_asc" {{ ($filter_type == 'sort_price_asc') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_price_asc') }}</option>
                 <option value="sort_price_desc" {{ ($filter_type == 'sort_price_desc') ? 'selected':''  }}>{{ sc_language_render('admin.plugin.sort_price_desc') }}</option>
@@ -63,7 +59,6 @@
                 <th>{{ sc_language_render('admin.template.image_demo') }}</th>
                 <th>{{ sc_language_render('admin.template.price') }}</th>
                 <th>{{ sc_language_render('admin.template.rated') }}</th>
-                <th><i class="fa fa-download" aria-hidden="true"></i></th>
                 <th>{{ sc_language_render('admin.template.date') }}</th>
                 <th>{{ sc_language_render('admin.template.action') }}</th>
               </tr>
@@ -84,8 +79,8 @@
   return '<span title="SCart version '.$version.'" class="badge badge-primary">'.$version.'</span>';
   },$scVersion)
   );
-  
-  if (array_key_exists($template['key'], $arrTemplateLocal)) 
+
+  if (array_key_exists($template['key'], $arrTemplateLocal))
   {
   $templateAction = '<span title="'.sc_language_render('admin.template.located').'" class="btn btn-flat btn-default"><i class="fa fa-check" aria-hidden="true"></i></span>';
   } elseif(!in_array(config('s-cart.core'), $scVersion)) {
@@ -125,16 +120,16 @@
                       $cal_vote = number_format($template['rated'], 1);
                       @endphp
                       <span title="{{ $cal_vote }}" style="color:#e66c16">
-                        @for ($i = 1; $i <= $cal_vote; $i++) 
+                        @for ($i = 1; $i <= $cal_vote; $i++)
                         <i class="fa fa-star voted" aria-hidden="true"></i>
                         @endfor
                         @if ($cal_vote == round($cal_vote))
-                          @for ($k = 1; $k <= (5-$cal_vote); $k++) 
+                          @for ($k = 1; $k <= (5-$cal_vote); $k++)
                           <i class="fa fa-star-o" aria-hidden="true"></i>
                           @endfor
                         @else
                            <i class="fa fa-star-half-o voted" aria-hidden="true"></i>
-                           @for ($k = 1; $k <= (5-$cal_vote); $k++) 
+                           @for ($k = 1; $k <= (5-$cal_vote); $k++)
                            <i class="fa fa-star-o" aria-hidden="true"></i>
                            @endfor
                         @endif
@@ -142,7 +137,7 @@
                      <span class="sum_vote">
                       ({{ $vote }}/{{ $vote_times }})
                     </span>
-  
+
                     </td>
                     <td>{{ $template['download']??'' }}</td>
                     <td>{{ $template['date']??'' }}</td>
@@ -153,7 +148,7 @@
                         <i class="fa fa-chain-broken" aria-hidden="true"></i> {!! sc_language_render('admin.template.link') !!}
                         </span>
                       </a>
-                    </td>                        
+                    </td>
                   </tr>
                 @endforeach
               @endif
