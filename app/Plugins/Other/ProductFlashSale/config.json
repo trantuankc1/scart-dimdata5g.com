@@ -1,0 +1,12 @@
+{
+    "name": "Product Flash Sale",
+    "image": "images/flash-sale.png",
+    "auth": "Lanh Le",
+    "email": "lanhktc@gmail.com",
+    "link": "https://s-cart.org",
+    "configGroup": "Plugins",
+    "configCode": "Other",
+    "configKey": "ProductFlashSale",
+    "version": "3.3",
+    "scartVersion": "7.1|7.2|8.0|8.1|8.2|9.0"
+}
