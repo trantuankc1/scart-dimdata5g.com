@@ -88,47 +88,47 @@ Use paginate: $products->appends(request()->except(['page','_token']))->links()
                                 {{ sc_language_render('cart.shipping_address') }}:<br></h3>
                             <table class="table box table-bordered" id="showTotal">
                                 <tr>
-                                    <th>{{ sc_language_render('order.name') }}:</td>
+                                    <td>{{ sc_language_render('order.name') }}:</td>
                                     <td>{{ $shippingAddress['first_name'] }} {{ $shippingAddress['last_name'] }}</td>
                                 </tr>
                                 @if (sc_config('customer_name_kana'))
                                     <tr>
-                                        <th>{{ sc_language_render('order.name_kana') }}:</td>
+                                        <td>{{ sc_language_render('order.name_kana') }}:</td>
                                         <td>{{ $shippingAddress['first_name_kana'].$shippingAddress['last_name_kana'] }}</td>
                                     </tr>
                                 @endif
 
                                 @if (sc_config('customer_phone'))
                                     <tr>
-                                        <th>{{ sc_language_render('order.phone') }}:</td>
+                                        <td>{{ sc_language_render('order.phone') }}:</td>
                                         <td>{{ $shippingAddress['phone'] }}</td>
                                     </tr>
                                 @endif
                                 <tr>
-                                    <th>{{ sc_language_render('order.email') }}:</td>
+                                    <td>{{ sc_language_render('order.email') }}:</td>
                                     <td>{{ $shippingAddress['email'] }}</td>
                                 </tr>
                                 <tr>
-                                    <th>{{ sc_language_render('order.address') }}:</td>
+                                    <td>{{ sc_language_render('order.address') }}:</td>
                                     <td>{{ $shippingAddress['address1'].' '.$shippingAddress['address2'].' '.$shippingAddress['address3'].','.$shippingAddress['country'] }}
                                     </td>
                                 </tr>
                                 @if (sc_config('customer_postcode'))
                                     <tr>
-                                        <th>{{ sc_language_render('order.postcode') }}:</td>
+                                        <td>{{ sc_language_render('order.postcode') }}:</td>
                                         <td>{{ $shippingAddress['postcode']}}</td>
                                     </tr>
                                 @endif
 
                                 @if (sc_config('customer_company'))
                                     <tr>
-                                        <th>{{ sc_language_render('order.company') }}:</td>
+                                        <td>{{ sc_language_render('order.company') }}:</td>
                                         <td>{{ $shippingAddress['company']}}</td>
                                     </tr>
                                 @endif
 
                                 <tr>
-                                    <th>{{ sc_language_render('cart.note') }}:</td>
+                                    <td>{{ sc_language_render('cart.note') }}:</td>
                                     <td>{{ $shippingAddress['comment'] }}</td>
                                 </tr>
                             </table>
