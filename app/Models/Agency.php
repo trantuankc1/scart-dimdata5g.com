@@ -9,20 +9,26 @@ class Agency extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
     protected $table = 'agencies';
     protected $fillable = [
-        'name',
-        'parent_id',
-        'commission_rate',
+        'name'
     ];
 
-    public function parent()
+    public function users()
     {
-        return $this->belongsTo(Agency::class, 'parent_id');
+        return $this->hasMany(AgencyUser::class, 'agency_id');
     }
 
-    public function children()
+    public function commission()
     {
-        return $this->hasMany(Agency::class, 'parent_id');
+        return $this->hasOne(AgencyCommission::class, 'agency_id');
+    }
+
+    public function relations()
+    {
+        return $this->belongsToMany(Agency::class, 'agency_relations', 'parent_agency_id', 'child_agency_id');
     }
 }

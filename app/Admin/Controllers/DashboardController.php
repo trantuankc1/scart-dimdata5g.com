@@ -2,6 +2,10 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\AdminUser;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use SCart\Core\Admin\Controllers\RootAdminController;
@@ -13,6 +17,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends RootAdminController
 {
+
     public function __construct()
     {
         parent::__construct();
@@ -136,6 +141,7 @@ class DashboardController extends RootAdminController
         $data['dataInYear'] = $dataInYear;
         //End order in 12 months
 
+
         return view($this->templatePathAdmin.'dashboard', $data);
     }
 
@@ -168,13 +174,14 @@ class DashboardController extends RootAdminController
             'method' => session('method'),
             'url' => session('url'),
         ];
+
         return view($this->templatePathAdmin.'deny', $data);
     }
 
     /**
      * [denySingle description]
      *
-     * @return  [type]  [return description]
+     * @return Application|Factory|View|\Illuminate\Foundation\Application [type]  [return description]
      */
     public function denySingle()
     {

@@ -11,9 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('sc_shop_order', function (Blueprint $table) {
-            $table->uuid('agency_id')->nullable()->index()->after('customer_id');
-        });
+        Schema::create('agency_relations', function (Blueprint $table) {
+                $table->id();
+                $table->uuid('parent_agency_id');
+                $table->uuid('child_agency_id');
+                $table->timestamps();
+            });
     }
 
     /**
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('sc_shop_order', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('agency_relations');
     }
 };

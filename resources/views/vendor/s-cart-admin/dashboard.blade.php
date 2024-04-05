@@ -1,7 +1,5 @@
 @extends($templatePathAdmin.'layout')
-
 @section('main')
-
     <div class="row">
 
         @if (config('admin.admin_dashboard.total_order'))
@@ -85,19 +83,11 @@
             <!-- /.col -->
     </div>
     @endif
+    {{--    agency total--}}
 
-    <div class="col-md-3 col-sm-6 col-xs-12">
-        <div class="info-box">
-            <span class="info-box-icon bg-red"><i class="fa fa-map-signs"></i></span>
+{{--    end agency total--}}
 
-            <div class="info-box-content">
-                <span class="info-box-text">Lợi Nhuận</span>
-                <span class="info-box-number">1000000 đ</span>
-            </div>
-            <!-- /.info-box-content -->
-        </div>
-        <!-- /.info-box -->
-    </div>
+
     <!-- /.row -->
 
     @if (config('admin.admin_dashboard.order_month'))
