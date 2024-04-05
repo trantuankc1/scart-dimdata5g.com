@@ -18,6 +18,8 @@ $layout_page = shop_order_success
         <div class="col-md-12 text-success">
             <h2>{{ sc_language_render('checkout.order_success_msg') }}</h2>
             <h3>{{ sc_language_render('checkout.order_success_order_info', ['order_id'=>session('orderID')]) }}</h3>
+            <h3>Qr Code Esim</h3>
+            <img src="https://thierryo.github.io/qrcode/reference/figures/example-1.png" alt="" srcset="">
         </div>
     </div>
 </div>

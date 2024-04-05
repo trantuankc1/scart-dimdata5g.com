@@ -7,7 +7,6 @@ $layout_page = shop_news_detail
 @endphp
 
 @extends($sc_templatePath.'.layout')
-
 @section('block_main')
 <section class="section section-sm section-first bg-default text-md-left">
     <div class="container">

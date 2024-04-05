@@ -37,15 +37,11 @@ class AdminUser extends Authenticatable
     protected static $listStore = null;
 
 
-    public function agent()
+    public function agencyProfits()
     {
-        return $this->hasMany(\App\Models\AgentCommission::class, 'agent_id');
+        return $this->hasMany(AgencyProfit::class, 'agency_id', 'uuid');
     }
 
-    public function sales()
-    {
-        return $this->hasMany(\App\Models\Sale::class, 'agent_id');
-    }
 
     /**
      * A user has and belongs to many roles.

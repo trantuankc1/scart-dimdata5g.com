@@ -4,7 +4,6 @@
     <a href="{{ sc_route_admin('admin.home') }}" class="brand-link navbar-secondary">
         {!! sc_config_admin('ADMIN_LOGO') !!}
     </a>
-
     <!-- Sidebar -->
     <div class="sidebar {{ config($styleDefine.'.sidebar') }}">
 
@@ -135,6 +134,8 @@
             @if (\Admin::user()->checkUrlAllowAccess(route('admin_order.index')))
                 @include($templatePathAdmin.'component.sidebar_bottom')
             @endif
+
+
         </nav>
         <!-- /.sidebar-menu -->
     </div>

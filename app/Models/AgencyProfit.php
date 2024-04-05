@@ -16,4 +16,9 @@ class AgencyProfit extends Model
         'total_profit',
         'last_updated_at'
     ];
+
+    public function adminUser()
+    {
+        return $this->belongsTo(AdminUser::class, 'agency_id', 'uuid');
+    }
 }

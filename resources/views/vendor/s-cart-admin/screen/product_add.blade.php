@@ -21,7 +21,6 @@
             <form action="{{ sc_route_admin('admin_product.create') }}" method="post" name="form_name" accept-charset="UTF-8" 
                 class="form-horizontal" id="form-main" enctype="multipart/form-data">
                 <input type="hidden" name="kind" value="{{ SC_PRODUCT_SINGLE }}">
-
                 <div id="main-add" class="card-body">
                         {{-- descriptions --}}
                         @foreach ($languages as $code => $language)
@@ -271,6 +270,22 @@
                             </div>
 
                         </div>
+
+{{--                    Qr Code--}}
+                    <div class="form-group row kind">
+                        <label for="image" class="col-sm-2 col-form-label">
+                            Qr Code
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input type="file" id="image" name="image_qr_code"
+                                       class="form-control input-sm image"/>
+                                <div class="input-group-append">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                         {{-- //images --}}
 
                         {{-- sku --}}

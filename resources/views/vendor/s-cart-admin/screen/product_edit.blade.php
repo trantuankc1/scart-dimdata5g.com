@@ -295,6 +295,24 @@
                         </div>
                         {{-- //Images --}}
 
+{{--                    qr code--}}
+                    <div class="form-group row kind">
+                        <label for="image" class="col-sm-2 col-form-label">
+                            Qr Code
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <input type="file" id="image" name="image_qr_code"
+                                       class="form-control input-sm image"/>
+                                <div class="input-group-append">
+                                    @if ($product->image_qr_code)
+                                        <img src="{{ asset('storage/' . $product->image_qr_code) }}" alt="QR Code" style="max-width: 100px;">
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
                         {{-- Sku --}}
                         <div class="form-group row {{ $errors->has('sku') ? ' text-red' : '' }}">
