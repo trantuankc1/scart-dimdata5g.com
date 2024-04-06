@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminUser;
+use App\Models\AgencyUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use SCart\Core\Front\Controllers\RootFrontController;
@@ -17,10 +18,9 @@ class ShopProductController extends RootFrontController
 
     public function rediectPageFromAgency(Request $request, $agencyUuid)
     {
-        $agency = AdminUser::where('id', $agencyUuid)->first();
-
+        $agency = AgencyUser::class::where('agency_id', $agencyUuid)->first();
         if ($agency) {
-            Session::put('agency_id', $agency->id);
+            Session::put('agency_id', $agency->agency_id);
             return redirect()->route('product.all');
         } else {
             return redirect('/');

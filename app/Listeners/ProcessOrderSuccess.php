@@ -3,7 +3,10 @@
 namespace App\Listeners;
 
 use App\Models\AdminUser;
+use App\Models\AgencyCommission;
+use App\Models\AgencyEarning;
 use App\Models\AgencyProfit;
+use App\Models\AgencyUser;
 use AWS\CRT\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,23 +30,23 @@ class ProcessOrderSuccess
     /**
      * Handle the event.
      *
-     * @param  OrderSuccess  $event
+     * @param OrderSuccess $event
      * @return void
      */
     public function handle(OrderSuccess $event)
     {
         $order = $event->order;
-        $totalPrice = $event->order->total;
+        $totalPrice = $order->total;
         $agencyId = Session::get('agency_id');
-        $agency = AdminUser::find($agencyId);
-        $commission =  $totalPrice * ($agency->commission_rate / 100);
-
-        // Lưu lợi nhuận vào bảng agency_profits
-        AgencyProfit::updateOrCreate(
-            ['agency_id' => $agencyId],
-            ['total_profit' => DB::raw("total_profit + $commission"), 'last_updated_at' => now()]
-        );
-
-//        Log::info('Commission for agency ' . $agencyId . ' is: ' . $commission);
+        $agencyCommission = AgencyCommission::where('agency_id', $agencyId)->first();
+        if (isset($agencyCommission))
+        {
+            $commissionRate = $agencyCommission->commission_rate;
+            $commission = $totalPrice * ($commissionRate / 100);
+            AgencyEarning::updateOrCreate(
+                ['agency_id' => $agencyId],
+                ['total_profit' => DB::raw("total_profit + $commission"), 'last_updated_at' => now()]
+            );
+        }
     }
 }

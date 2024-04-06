@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AgencyUserRequest;
 use App\Models\Agency;
 use App\Models\AgencyCommission;
 use App\Models\AgencyUser;
@@ -24,7 +25,7 @@ class AgencyUserController extends Controller
         return view('agency_users.create', compact('agencies'));
     }
 
-    public function store(Request $request)
+    public function store(AgencyUserRequest $request)
     {
         $user_agency = new AgencyUser();
         $user_agency->username = $request->input('username_agency');
@@ -48,12 +49,11 @@ class AgencyUserController extends Controller
     public function edit($id)
     {
         $user = AgencyUser::findOrFail($id);
-
         return view('agency_users.edit', compact('user'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(AgencyUserRequest $request, $id)
     {
         $user = AgencyUser::findOrFail($id);
 

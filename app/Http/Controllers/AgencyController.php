@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AgencyRequest;
 use App\Models\Agency;
 use App\Models\AgencyRelation;
 use Illuminate\Http\Request;
@@ -76,7 +77,7 @@ class AgencyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         $agency = Agency::findOrFail($id);
         $agency->delete();

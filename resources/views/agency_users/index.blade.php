@@ -6,7 +6,8 @@
         <div class="row">
             <div class="col-md-12">
                 <h3 class="text-capitalize text-center">danh sách đại lý</h3>
-                <table class="table table-bordered table-hover text-center text-capitalize">
+                <a class="btn btn-success text-capitalize" href="{{ route('agency_users.create') }}">tạo mới đại lý</a>
+                <table class="table table-bordered table-hover text-center text-capitalize mt-2">
                     <thead>
                     <tr>
                         <th>cấp đại lý</th>

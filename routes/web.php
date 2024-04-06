@@ -36,6 +36,9 @@ Route::group(
             $nameSpaceAdminDashboard = 'SCart\Core\Admin\Controllers';
         }
 
+        /**
+         * create lever agency
+         */
 
         Route::get('/list-agency', [AgencyController::class, 'index'])->name('agency.index');
         Route::get('/create-agency', [AgencyController::class, 'create'])->name('agency.create');
@@ -51,8 +54,8 @@ Route::group(
         Route::get('/agency_users/create', [AgencyUserController::class, 'create'])->name('agency_users.create');
         Route::post('/agency_users', [AgencyUserController::class, 'store'])->name('agency_users.store');
 
-        Route::get('/agency-users/{id}/edit', [AgencyUserController::class, 'edit'])->name('agency_users.edit');
-        Route::put('/agency-users/{id}', [AgencyUserController::class, 'update'])->name('agency_users.update');
+        Route::get('/agency-user/{id}/edit', [AgencyUserController::class, 'edit'])->name('agency_users.edit');
+        Route::put('/agency-user/{id}', [AgencyUserController::class, 'update'])->name('agency_users.update');
 
     }
 );
