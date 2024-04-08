@@ -54,9 +54,9 @@ Route::group(
         Route::get('/agency_users/create', [AgencyUserController::class, 'create'])->name('agency_users.create');
         Route::post('/agency_users', [AgencyUserController::class, 'store'])->name('agency_users.store');
 
-        Route::get('/agency-user/{id}/edit', [AgencyUserController::class, 'edit'])->name('agency_users.edit');
+        Route::get('/agency_users/{agencyId}/edit', [AgencyUserController::class, 'edit'])->name('agency_users.edit');
         Route::put('/agency-user/{id}', [AgencyUserController::class, 'update'])->name('agency_users.update');
-
+        Route::delete('/agency-user/{id}', [AgencyUserController::class, 'destroy'])->name('agency_users.destroy');
     }
 );
 /**

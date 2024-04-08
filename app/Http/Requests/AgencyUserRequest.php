@@ -24,7 +24,7 @@ class AgencyUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username_agency' => 'required|string|unique:agency_users,username',
+            'username_agency' => 'require',
             'password_user_agency' => 'required|string',
             'email_user_agency' => 'required|string|email|max:150|unique:agency_users,email',
             'agency_id' => 'required',

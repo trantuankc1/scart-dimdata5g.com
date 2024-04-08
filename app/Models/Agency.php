@@ -9,12 +9,13 @@ class Agency extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
+    protected $table = 'agencies';
+
     public $incrementing = false;
 
-    protected $table = 'agencies';
     protected $fillable = [
-        'name'
+        'name',
+        'lavel'
     ];
 
     public function users()

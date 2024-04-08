@@ -9,8 +9,14 @@ class AgencyCommission extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
-    public $incrementing = true;
+    protected $fillable = [
+        'agency_id',
+        'commission_rate',
+    ];
+
+    protected $table = 'agency_commissions';
+
+
 
     public function agency()
     {

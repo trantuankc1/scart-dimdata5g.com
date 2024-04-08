@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AgencyRequest;
 use App\Models\Agency;
-use App\Models\AgencyRelation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -34,13 +32,14 @@ class AgencyController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:100',
+            'name' => 'required',
+            'level' => 'required|integer|min:1', // Kiểm tra level là số nguyên dương
         ]);
-
-        // Tạo đại lý mới và gán UUID cho cột 'id'
+        $uuid = Str::uuid();
         $agency = new Agency();
-        $agency->id = Str::uuid();
-        $agency->name = $validatedData['name'];
+        $agency->id = $uuid;
+        $agency->name = $request->input('name');
+        $agency->level = $request->input('level');
         $agency->save();
 
         return redirect()->route('agency.index')->with('success', 'Đã tạo đại lý thành công!');

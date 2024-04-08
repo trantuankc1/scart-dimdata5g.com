@@ -9,6 +9,20 @@ class AgencyRelation extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id';
-    public $incrementing = true;
+    protected $table = 'agency_relations';
+
+    protected $fillable = [
+        'parent_agency_id',
+        'child_agency_id',
+    ];
+
+    public function parentAgency()
+    {
+        return $this->belongsTo(Agency::class, 'parent_agency_id');
+    }
+
+    public function childAgency()
+    {
+        return $this->belongsTo(Agency::class, 'child_agency_id');
+    }
 }

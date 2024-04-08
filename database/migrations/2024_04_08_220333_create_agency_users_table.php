@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('agency_users', function (Blueprint $table) {
-            $table->id(); // Đặt thuộc tính autoIncrement
+            $table->uuid('id')->primary();
             $table->string('username', 100)->unique();
             $table->string('password', 60);
             $table->string('email', 150)->unique();
             $table->uuid('agency_id');
+            $table->unsignedTinyInteger('agency_level')->default(1); // Thêm cột 'agency_level' để lưu cấp độ của đại lý
             $table->timestamps();
         });
     }

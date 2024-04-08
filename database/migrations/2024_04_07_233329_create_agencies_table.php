@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('agencies', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name', 100); // Thêm cột 'name' vào bảng
+            $table->unsignedTinyInteger('level')->default(1); // Thêm cột 'level' để lưu cấp độ của đại lý
             $table->timestamps();
         });
     }
