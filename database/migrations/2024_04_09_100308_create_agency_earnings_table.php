@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('agency_earnings', function (Blueprint $table) {
             $table->id();
-            $table->uuid('agency_id');
+            $table->uuid('agency_user_id'); // Sửa thành agency_user_id để khớp với session
             $table->decimal('total_profit', 15, 2)->default(0);
             $table->timestamps();
         });

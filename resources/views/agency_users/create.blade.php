@@ -5,7 +5,7 @@
         @csrf
 
         <div class="form-group">
-            <label for="username">Tên đăng nhập:</label>
+            <label for="username">Tên Đại Lý:</label>
             <input type="text" name="username" id="username" class="form-control" required>
         </div>
         <div class="form-group">

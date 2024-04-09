@@ -37,14 +37,18 @@ class ProcessOrderSuccess
     {
         $order = $event->order;
         $totalPrice = $order->total;
-        $agencyId = Session::get('agency_id');
-        $agencyCommission = AgencyCommission::where('agency_id', $agencyId)->first();
-        if (isset($agencyCommission))
-        {
+        $agencyUserId = Session::get('agency_user_id');
+
+        // Tìm agency commission dựa trên agency_id
+        $agencyCommission = AgencyCommission::where('agency_user_id', $agencyUserId)->first();
+
+        if ($agencyCommission) {
             $commissionRate = $agencyCommission->commission_rate;
             $commission = $totalPrice * ($commissionRate / 100);
+
+            // Lưu hoa hồng cho tài khoản đại lý cụ thể
             AgencyEarning::updateOrCreate(
-                ['agency_id' => $agencyId],
+                ['agency_user_id' => $agencyUserId],
                 ['total_profit' => DB::raw("total_profit + $commission"), 'last_updated_at' => now()]
             );
         }

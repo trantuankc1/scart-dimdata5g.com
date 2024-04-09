@@ -23,13 +23,8 @@ class Agency extends Model
         return $this->hasMany(AgencyUser::class, 'agency_id');
     }
 
-    public function commission()
+    public function commissions()
     {
-        return $this->hasOne(AgencyCommission::class, 'agency_id');
-    }
-
-    public function relations()
-    {
-        return $this->belongsToMany(Agency::class, 'agency_relations', 'parent_agency_id', 'child_agency_id');
+        return $this->hasMany(AgencyCommission::class, 'agency_id');
     }
 }

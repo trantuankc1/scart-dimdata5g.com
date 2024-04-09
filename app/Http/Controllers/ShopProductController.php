@@ -18,14 +18,15 @@ class ShopProductController extends RootFrontController
 
     public function rediectPageFromAgency(Request $request, $agencyUuid)
     {
-        $agency = AgencyUser::class::where('agency_id', $agencyUuid)->first();
-        if ($agency) {
-            Session::put('agency_id', $agency->agency_id);
+        $agencyUser = AgencyUser::where('id', $agencyUuid)->first();
+        if ($agencyUser) {
+            Session::put('agency_user_id', $agencyUser->agency_id); // Lưu agency_id vào session thay vì id của agency_user
             return redirect()->route('product.all');
         } else {
             return redirect('/');
         }
     }
+
 
     /**
      * Process front all products

@@ -21,13 +21,15 @@ class AgencyUser extends Model
 
     public function agency()
     {
-        return $this->belongsTo(Agency::class);
+        return $this->belongsTo(Agency::class, 'agency_id');
     }
 
-    public function commission()
+
+    public function commissions()
     {
-        return $this->hasOne(AgencyCommission::class, 'agency_id');
+        return $this->hasMany(AgencyCommission::class, 'agency_user_id', 'id');
     }
+
     public static function findByUuidOrFail($uuid)
     {
         $user = static::where('agency_id', $uuid)->first();

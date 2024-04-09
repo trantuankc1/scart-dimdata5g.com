@@ -59,8 +59,8 @@ class AgencyController extends Controller
     public function edit(string $id)
     {
         $agency = Agency::findOrFail($id);
-        return view('agencies.edit', compact('agency'));
 
+        return view('agencies.edit', compact('agency'));
     }
 
     /**

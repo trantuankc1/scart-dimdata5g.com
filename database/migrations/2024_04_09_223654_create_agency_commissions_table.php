@@ -12,11 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('agency_commissions', function (Blueprint $table) {
-                $table->id();
-                $table->uuid('agency_id');
-                $table->decimal('commission_rate', 5, 2)->nullable();
-                $table->timestamps();
-            });
+            $table->id();
+            $table->uuid('agency_id');
+            $table->uuid('agency_user_id');
+            $table->decimal('commission_rate', 5, 2)->nullable();
+            $table->timestamps();
+        });
     }
 
     /**

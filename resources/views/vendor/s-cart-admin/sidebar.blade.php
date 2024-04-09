@@ -273,9 +273,15 @@
             @if (\Admin::user()->checkUrlAllowAccess(route('admin_order.index')))
                 @include($templatePathAdmin.'component.sidebar_bottom')
             @endif
-            <ul>
-                <li><a href="{{ route('agency.index') }}">Cấp đại lý</a></li>
-                <li><a href="{{ route('agency_users.index') }}">danh sách Đại lý</a></li>
+        </nav>
+        <nav class="text-capitalize nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu"">
+            <ul class="nav-item has-treeview" style="list-style: none">
+                <li class="nav-item">
+                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('agency.index') }}">Cấp đại lý</a>
+                </li>
+                <li>
+                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('agency_users.index') }}">danh sách Đại lý</a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

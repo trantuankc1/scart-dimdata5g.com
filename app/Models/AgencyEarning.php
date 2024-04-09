@@ -10,9 +10,11 @@ class AgencyEarning extends Model
     use HasFactory;
 
     protected $fillable = [
-        'agency_id',
+        'agency_user_id',
         'total_profit',
     ];
+
+    protected $table  = 'agency_earnings';
 
     public function agency()
     {

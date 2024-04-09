@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyUserController;
+use App\Http\Controllers\AgencyUserLogin;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -20,6 +21,12 @@ use Illuminate\Support\Facades\Session;
 // });
 
 Route::get('/agency/{agencyUuid}', [\App\Http\Controllers\ShopProductController::class, 'rediectPageFromAgency'])->name('agency.handle');
+/**
+ * Route Login Agency User
+ */
+Route::get('/agency-login', [AgencyUserLogin::class, 'formLogin'])->name('agency_users.login');
+Route::post('/agency-login', [AgencyUserLogin::class, 'login'])->name('agency_users.login');
+
 
 Route::group(
     [
@@ -56,9 +63,7 @@ Route::group(
 
         Route::get('/agency_users/{agencyId}/edit', [AgencyUserController::class, 'edit'])->name('agency_users.edit');
         Route::put('/agency-user/{id}', [AgencyUserController::class, 'update'])->name('agency_users.update');
-        Route::delete('/agency-user/{id}', [AgencyUserController::class, 'destroy'])->name('agency_users.destroy');
+        Route::delete('/agency-user/{id}', [AgencyUserController::class, 'delete'])->name('agency_users.destroy');
     }
 );
-/**
- * route tạo đại lý
- */
+
