@@ -14,6 +14,8 @@ class AgencyUser extends Model
         'username', 'password', 'email', 'agency_id', 'agency_level'
     ];
 
+    protected $guard = 'agency';
+
     public $incrementing = false; // Đặt giá trị này thành false để Laravel không cố gắng tự động tăng trường id
 
     protected $keyType = 'string'; // Đặt kiểu dữ liệu cho trường id

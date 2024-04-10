@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyUserController;
-use App\Http\Controllers\AgencyUserLogin;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +18,7 @@ use Illuminate\Support\Facades\Session;
 //     return view('welcome');
 // });
 
-Route::get('/agency/{agencyUuid}', [\App\Http\Controllers\ShopProductController::class, 'rediectPageFromAgency'])->name('agency.handle');
-/**
- * Route Login Agency User
- */
-Route::get('/agency-login', [AgencyUserLogin::class, 'formLogin'])->name('agency_users.login');
-Route::post('/agency-login', [AgencyUserLogin::class, 'login'])->name('agency_users.login');
-
+//Route::get('/agency/{agencyUuid}', [\App\Http\Controllers\ShopProductController::class, 'rediectPageFromAgency'])->name('agency.handle');
 
 Route::group(
     [

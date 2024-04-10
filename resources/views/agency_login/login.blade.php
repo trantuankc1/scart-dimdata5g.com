@@ -2,8 +2,13 @@
     <div class="form">
         <form class="login-form" action="{{ route('agency_users.login') }}" method="post">
             @csrf
-            <input type="text" name="email" placeholder="username"/>
-            <input type="password" name="password" placeholder="password"/>
+            @method('POST')
+            <label>
+                <input type="text" name="email" placeholder="username"/>
+            </label>
+            <label>
+                <input type="password" name="password" placeholder="password"/>
+            </label>
             <button>login</button>
         </form>
     </div>
