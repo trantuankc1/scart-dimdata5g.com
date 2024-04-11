@@ -16,10 +16,14 @@ class CheckLoginUserAgency
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('agency_user')->check()) {
-            return $next($request);
+        if (Auth::check())
+        {
+            if (Auth::user())
+            {
+                return $next($request);
+            }
+            return redirect()->route('agency_users.login')->with('error', 'Permission denied');
         }
-
-        return redirect()->route('agency_users.login');
+        return redirect()->route('agency_users.login')->with('error', 'Permission denied');
     }
 }

@@ -16,11 +16,13 @@ class AgencyUserLogin extends Controller
     {
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
             return redirect()->route('agency_user.dashboard');
         }
 
         return back()->with('error', 'Email hoặc mật khẩu không chính xác.');
     }
+
 
     public function logoutAgencyUser(Request $request)
     {
