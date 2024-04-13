@@ -89,7 +89,7 @@
                             aria-expanded="false"
                     >
                         <img
-                                src="../assets/images/users/1.jpg"
+                                src="{{ asset('agency_css/assets/images/users/1.jpg') }}"
                                 alt="user"
                                 class="rounded-circle"
                                 width="31"

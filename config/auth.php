@@ -117,6 +117,11 @@ return [
             'table'    => env('DB_PREFIX', '').'admin_password_resets',
             'expire'   => 60,
         ],
+        'agency_users' => [
+            'provider' => 'agency_user',
+            'table'    => 'agency_users',
+            'expire'   => 60,
+        ]
     ],
 
     /*

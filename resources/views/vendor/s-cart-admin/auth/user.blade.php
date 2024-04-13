@@ -241,20 +241,6 @@
                         </div>
 
                         {{-- //select permission --}}
-                        <div class="form-group  row">
-                            <label for="commission_rate" class="col-sm-2  control-label">Chiết khấu %</label>
-
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
-                                    </div>
-                                    <input type="text" id="commission_rate" name="commission_rate"
-                                           value="@if($user != null) {{ $user->commission_rate }} @endif" class="form-control name"
-                                           placeholder="Nhập chiết khấu ở đây"/>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- /.card-body -->

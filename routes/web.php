@@ -18,8 +18,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-//Route::get('/agency/{agencyUuid}', [\App\Http\Controllers\ShopProductController::class, 'rediectPageFromAgency'])->name('agency.handle');
-
 Route::group(
     [
         'prefix' => SC_ADMIN_PREFIX,

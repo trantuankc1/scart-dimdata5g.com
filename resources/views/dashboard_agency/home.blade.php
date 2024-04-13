@@ -21,11 +21,10 @@
                 <p class="fw-bold"><i class="mdi mdi-cash"></i> tổng doanh thu theo tháng này</p>
                 <p>1000 vnđ</p>
             </div>
-
         </div>
         <div class="link mt-5">
-            <a class="btn btn-info" id="copyLink" href="#"><i class="mdi mdi-content-copy"></i> Link bán hàng của bạn</a>
-        </div>
+                <a class="btn btn-info" id="copyLink" href="#"><i class="mdi mdi-content-copy"></i> Link bán hàng của bạn</a>
+           </div>
     </div>
     <style>
         .box-total {

@@ -15,7 +15,7 @@ class AgencyUserLogin extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('agency_user')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('agency_user.dashboard');
         }

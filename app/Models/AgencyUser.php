@@ -6,6 +6,9 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Hash;
 
 class AgencyUser extends Model implements Authenticatable
 {
@@ -15,24 +18,38 @@ class AgencyUser extends Model implements Authenticatable
         'username', 'password', 'email', 'agency_id', 'agency_level'
     ];
 
-    protected $guard = 'agency';
+    /**
+     * @var string
+     */
+    protected $guard = 'agency_user';
 
-    public $incrementing = false; // Đặt giá trị này thành false để Laravel không cố gắng tự động tăng trường id
+    /**
+     * @var bool
+     */
+    public $incrementing = false;
 
-    protected $keyType = 'string'; // Đặt kiểu dữ liệu cho trường id
+    protected $keyType = 'string';
 
-
+    /**
+     * @return BelongsTo
+     */
     public function agency()
     {
         return $this->belongsTo(Agency::class, 'agency_id');
     }
 
-
+    /**
+     * @return HasMany
+     */
     public function commissions()
     {
         return $this->hasMany(AgencyCommission::class, 'agency_user_id', 'id');
     }
 
+    /**
+     * @param $uuid
+     * @return mixed $user
+     */
     public static function findByUuidOrFail($uuid)
     {
         $user = static::where('agency_id', $uuid)->first();
@@ -44,6 +61,14 @@ class AgencyUser extends Model implements Authenticatable
         return $user;
     }
 
+    /**
+     * @param $credentials
+     * @return bool
+     */
+    public function validateCredentials($credentials)
+    {
+        return Hash::check($credentials['password'], $this->getAuthPassword());
+    }
     public function getAuthIdentifierName()
     {
         // TODO: Implement getAuthIdentifierName() method.
@@ -56,7 +81,7 @@ class AgencyUser extends Model implements Authenticatable
 
     public function getAuthPassword()
     {
-        // TODO: Implement getAuthPassword() method.
+        return $this->password;
     }
 
     public function getRememberToken()

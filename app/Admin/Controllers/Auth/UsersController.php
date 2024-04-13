@@ -259,7 +259,6 @@ class UsersController extends RootAdminController
             'avatar'   => 'nullable|string|max:255',
             'password' => 'nullable|string|max:60|min:6|confirmed',
             'email'    => 'required|string|email|max:255|unique:"'.AdminUser::class.'",email,' . $user->id,
-            'commission_rate' => 'numeric'
         ], [
             'username.regex' => sc_language_render('admin.user.username_validate'),
         ]);
@@ -275,7 +274,6 @@ class UsersController extends RootAdminController
             'username' => strtolower($data['username']),
             'avatar' => $data['avatar'],
             'email' => strtolower($data['email']),
-            'commission_rate' => $data['commission_rate'],
         ];
         if ($data['password']) {
             $dataUpdate['password'] = bcrypt($data['password']);

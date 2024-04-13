@@ -12,7 +12,7 @@
         <!-- Các trường thông tin khác tương tự -->
         <div class="form-group">
             <label for="password">Mật khẩu:</label>
-            <input type="password" name="password" id="password" class="form-control" required>
+            <input type="password" name="password" id="password" class="form-control" >
         </div>
         <div class="form-group">
             <label for="email">Email:</label>

@@ -20,5 +20,6 @@ Route::get('/logout', [AgencyUserLogin::class, 'logoutAgencyUser'])->name('agenc
 
 
 Route::prefix('/agency')->middleware('checkLoginUserAgency')->group(function () {
+    Route::get('/link/{agencyUuid}', [AgencyDashBoardController::class, 'redirectPageFromAgency'])->name('redirect.from.agency');
     Route::get('/dashboard', [AgencyDashBoardController::class, 'index'])->name('agency_user.dashboard');
 });

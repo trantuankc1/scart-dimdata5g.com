@@ -4,26 +4,23 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
 class CheckLoginUserAgency
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(Request): (Response)  $next
+     * @param \Closure(Request): (Response) $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next)
     {
-        if (Auth::check())
-        {
-            if (Auth::user())
-            {
-                return $next($request);
-            }
-            return redirect()->route('agency_users.login')->with('error', 'Permission denied');
+//        dd($request->session()->all());
+        if (Auth::guard('agency_user')->check()) {
+            return redirect()->route('agency_user.dashboard');
         }
+
         return redirect()->route('agency_users.login')->with('error', 'Permission denied');
     }
 }

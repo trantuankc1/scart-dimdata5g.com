@@ -4,12 +4,12 @@
             @csrf
             @method('POST')
             <label>
-                <input type="text" name="email" placeholder="username"/>
+                <input type="text" name="email" placeholder="email"/>
             </label>
             <label>
                 <input type="password" name="password" placeholder="password"/>
             </label>
-            <button>login</button>
+            <button type="submit">Đăng nhập</button>
         </form>
     </div>
 </div>

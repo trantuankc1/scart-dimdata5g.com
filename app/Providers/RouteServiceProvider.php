@@ -48,6 +48,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        $this->mapMyRoutes();
     }
 
     /**
@@ -65,6 +67,16 @@ class RouteServiceProvider extends ServiceProvider
     }
 
     /**
+     * @return void
+     */
+    protected function mapMyRoutes()
+    {
+        Route::middleware(['web', 'localization', 'currency', 'checkdomain'])
+            ->namespace($this->namespace)
+            ->group(base_path('routes/myroute.php'));
+    }
+
+    /**
      * Define the "api" routes for the application.
      *
      * These routes are typically stateless.
@@ -78,7 +90,7 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/api.php'));
     }
-    
+
     /**
      * Configure the rate limiters for the application.
      *
