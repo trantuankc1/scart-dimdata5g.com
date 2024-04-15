@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 
 class AgencyUser extends Model implements Authenticatable
 {
     use HasFactory;
+
+    use Notifiable;
 
     protected $fillable = [
         'username', 'password', 'email', 'agency_id', 'agency_level'

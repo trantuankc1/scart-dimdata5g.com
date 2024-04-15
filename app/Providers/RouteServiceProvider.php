@@ -49,7 +49,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        $this->mapMyRoutes();
+//        $this->mapMyRoutes();
     }
 
     /**
@@ -69,12 +69,12 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * @return void
      */
-    protected function mapMyRoutes()
-    {
-        Route::middleware(['web', 'localization', 'currency', 'checkdomain'])
-            ->namespace($this->namespace)
-            ->group(base_path('routes/myroute.php'));
-    }
+//    protected function mapMyRoutes()
+//    {
+//        Route::middleware(['web'])
+//            ->namespace($this->namespace)
+//            ->group(base_path('routes/myroute.php'));
+//    }
 
     /**
      * Define the "api" routes for the application.
