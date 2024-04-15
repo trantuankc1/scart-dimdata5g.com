@@ -9,22 +9,24 @@
                 <h3 class="fw-bold">tổng kết doanh thu</h3>
                 <div class="total">
                     <span class="fw-bold"><i class="mdi mdi-cash"></i>  doanh số </span>
-                    <p>10000 vnđ</p>
+                    <p>{{ number_format($agencyUserEarning->total_profit) }}</p>
                 </div>
                 <div class="total">
                     <span class="fw-bold"><i class="mdi mdi-cash"></i>  lợi nhuận</span>
-                    <p>10000 vnđ</p>
+                    <p>{{ number_format($agencyUserEarning->total_profit) }}</p>
                 </div>
             </div>
             <div class="col box-total-money-by-month">
                 <h3 class="fw-bold">doanh thu tháng này</h3>
                 <p class="fw-bold"><i class="mdi mdi-cash"></i> tổng doanh thu theo tháng này</p>
-                <p>1000 vnđ</p>
+                <p>{{ number_format($agencyUserEarning->total_profit) }}</p>
             </div>
         </div>
         <div class="link mt-5">
-                <a class="btn btn-info" id="copyLink" href="#"><i class="mdi mdi-content-copy"></i> Link bán hàng của bạn</a>
-           </div>
+            <a class="btn btn-info" id="copyLink"
+               href="{{ route('redirect.from.agency', ['agencyUuid' => $agencyUsers->id]) }}"><i
+                        class="mdi mdi-content-copy"></i> Link bán hàng của bạn</a>
+        </div>
     </div>
     <style>
         .box-total {

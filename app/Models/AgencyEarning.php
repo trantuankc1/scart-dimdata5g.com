@@ -20,4 +20,9 @@ class AgencyEarning extends Model
     {
         return $this->belongsTo(Agency::class, 'agency_id');
     }
+
+    public function agencyUser()
+    {
+        return $this->belongsTo(AgencyUser::class, 'agency_user_id', 'id');
+    }
 }

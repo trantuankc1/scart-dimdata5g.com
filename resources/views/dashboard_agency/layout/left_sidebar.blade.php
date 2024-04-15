@@ -5,7 +5,7 @@
                 <li class="sidebar-item">
                     <a
                             class="sidebar-link {{ request()->is('/') ? 'active' : '' }} waves-effect waves-dark sidebar-link"
-                            href=""
+                            href="{{ route('agency_user.dashboard') }}"
                     ><i class="mdi mdi-view-dashboard"></i
                         ><span class="hide-menu">Tổng quan</span></a
                     >
@@ -40,8 +40,8 @@
 
                 <li class="sidebar-item">
                     <a
-                            class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="#"
+                            class="sidebar-link waves-effect waves-dark sidebar-link {{ request()->is('agency/withdraw') ? 'active' : '' }}"
+                            href="{{ route('agency_user.withdraw') }}"
                             aria-expanded="false"
                     ><i class="mdi mdi-relative-scale"></i
                         ><span class="hide-menu">thanh toán</span></a

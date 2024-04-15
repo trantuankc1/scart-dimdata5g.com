@@ -4,6 +4,7 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyDashBoardController;
 use App\Http\Controllers\AgencyUserController;
 use App\Http\Controllers\AgencyUserLogin;
+use App\Http\Controllers\AgencyWithdrawalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,14 @@ Route::get('/logout', [AgencyUserLogin::class, 'logoutAgencyUser'])->name('agenc
 
 Route::prefix('agency')->middleware('checkLoginUserAgency')->group(function () {
     Route::get('/dashboard', [AgencyDashBoardController::class, 'index'])->name('agency_user.dashboard');
+
+    Route::get('/withdraw', [AgencyWithdrawalController::class, 'index'])->name('agency_user.withdraw');
+    Route::post('/process-withdraw', [AgencyWithdrawalController::class, 'processWithdraw'])->name('agency_user.process_withdraw');
+    Route::get('/list-transaction', [AgencyWithdrawalController::class, 'listTransaction'])->name('agency_user.listTransaction');
+    Route::get('/edit-info-bank/{id}', [AgencyWithdrawalController::class, 'editInfoPayout'])->name('agency_user.edit_info_bank');
+    Route::put('/update-info-bank/{id}', [AgencyWithdrawalController::class, 'updateInfoBank'])->name('agency_user.update_info_bank');
+
+
     Route::get('/link/{agencyUuid}', [AgencyDashBoardController::class, 'redirectPageFromAgency'])->name('redirect.from.agency');
 });
 
