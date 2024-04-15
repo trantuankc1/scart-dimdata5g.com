@@ -12,8 +12,8 @@
                 </li>
                 <li class="sidebar-item">
                     <a
-                            class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="#"
+                            class="sidebar-link {{ request()->is('agency/list-order-sim') ? 'active' : '' }} waves-effect waves-dark sidebar-link"
+                            href="{{ route('agency_user.list_order_sim') }}"
                             aria-expanded="false"
                     ><i class="mdi mdi-account"></i
                         ><span class="hide-menu">Lô sim</span></a

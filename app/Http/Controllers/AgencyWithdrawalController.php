@@ -77,14 +77,21 @@ class AgencyWithdrawalController extends Controller
         return view('dashboard_agency.edit_info_bank', compact('transaction'));
     }
 
-    public function updateInfoBank(Request $request)
+    public function updateInfoBank(Request $request, $id)
     {
-        $withdrawalRequest = new AgencyWithdrawalRequest();
-        $withdrawalRequest->bank_account_number = $request->bank_account_number;
-        $withdrawalRequest->name_account_owner = $request->name_account_owner;
-        $withdrawalRequest->save();
+        $request->validate([
+            'bank_name' => 'required|string',
+            'bank_account_number' => 'required|numeric',
+            'name_account_owner' => 'required|string',
+        ]);
 
-//        return redirect()->route('agency_user.listTransaction');
+        $transaction = AgencyWithdrawalRequest::findOrFail($id);
+        $transaction->bank_name = $request->bank_name;
+        $transaction->bank_account_number = $request->bank_account_number;
+        $transaction->name_account_owner = $request->name_account_owner;
+        $transaction->save();
+
+        return redirect()->route('agency_user.dashboard')->with('success', 'Thông tin ngân hàng đã được cập nhật thành công.');
     }
 
 }

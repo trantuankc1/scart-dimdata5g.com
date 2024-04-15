@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyDashBoardController;
+use App\Http\Controllers\AgencyOrderSimController;
 use App\Http\Controllers\AgencyUserController;
 use App\Http\Controllers\AgencyUserLogin;
 use App\Http\Controllers\AgencyWithdrawalController;
@@ -33,6 +34,8 @@ Route::prefix('agency')->middleware('checkLoginUserAgency')->group(function () {
     Route::get('/edit-info-bank/{id}', [AgencyWithdrawalController::class, 'editInfoPayout'])->name('agency_user.edit_info_bank');
     Route::put('/update-info-bank/{id}', [AgencyWithdrawalController::class, 'updateInfoBank'])->name('agency_user.update_info_bank');
 
+    Route::get('/list-order-sim', [AgencyOrderSimController::class, 'index'])->name('agency_user.list_order_sim');
+    Route::get('/create-order-sim', [AgencyOrderSimController::class, 'createOrderSim'])->name('agency_user.create_order_sim');
 
     Route::get('/link/{agencyUuid}', [AgencyDashBoardController::class, 'redirectPageFromAgency'])->name('redirect.from.agency');
 });
