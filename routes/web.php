@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Controllers\AdminListOrderSimController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyDashBoardController;
 use App\Http\Controllers\AgencyOrderSimController;
@@ -80,6 +81,14 @@ Route::group(
         Route::get('/agency_users/{agencyId}/edit', [AgencyUserController::class, 'edit'])->name('agency_users.edit');
         Route::put('/agency-user/{id}', [AgencyUserController::class, 'update'])->name('agency_users.update');
         Route::delete('/agency-user/{id}', [AgencyUserController::class, 'delete'])->name('agency_users.destroy');
+
+
+        /**
+         * list or sim by agency user
+         */
+
+        Route::get('/list-order-sim', [AdminListOrderSimController::class, 'index'])->name('admin.list_order_sim');
+        Route::put('/process-update-status-order-sim/{id}', [AdminListOrderSimController::class, 'updateOrderStatus'])->name('admin.process_update_status_order_sim');
     }
 );
 

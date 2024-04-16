@@ -26,22 +26,23 @@
                 <td>thời gian tạo đơn hàng</td>
             </tr>
             <tbody>
-                @php
+            @php
                 $stt = 1;
-                 @endphp
-                @foreach($transaction as $infoTransaction)
-                    <tr>
-                        <td>{{ $stt++ }}</td>
-                        <td>{{ $infoTransaction->sim_type }}</td>
-                        <td>{{ $infoTransaction->quantity }}</td>
-                        <td>{{ $infoTransaction->delivery_address }}</td>
-                        <td>{{ $infoTransaction->contact_email }}</td>
-                        <td>{{ $infoTransaction->phone }}</td>
-                        <td>{{ $infoTransaction->status }}</td>
-                        <td>{{ $infoTransaction->created_at }}</td>
-                        <td><a href="{{ route('agency_user.edit_info_order_sim', $infoTransaction->id) }}" class="btn btn-info">sửa</a></td>
-                    </tr>
-                @endforeach
+            @endphp
+            @foreach($transaction as $infoTransaction)
+                <tr>
+                    <td>{{ $stt++ }}</td>
+                    <td>{{ $infoTransaction->sim_type }}</td>
+                    <td>{{ $infoTransaction->quantity }}</td>
+                    <td>{{ $infoTransaction->delivery_address }}</td>
+                    <td>{{ $infoTransaction->contact_email }}</td>
+                    <td>{{ $infoTransaction->phone }}</td>
+                    <td>{{ $infoTransaction->status }}</td>
+                    <td>{{ $infoTransaction->created_at }}</td>
+                    <td><a href="{{ route('agency_user.edit_info_order_sim', $infoTransaction->id) }}"
+                           class="btn btn-info">sửa</a></td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

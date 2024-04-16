@@ -49,6 +49,11 @@ class AgencyUser extends Model implements Authenticatable
         return $this->hasMany(AgencyCommission::class, 'agency_user_id', 'id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(AgencyOrderSim::class, 'agency_user_id');
+    }
+
     public function withdrawalRequests()
     {
         return $this->hasMany(AgencyWithdrawalRequest::class);

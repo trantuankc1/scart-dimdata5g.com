@@ -25,4 +25,8 @@ class AgencyOrderSim extends Model
         'phone',
         'status',
     ];
+    public function agencyUser()
+    {
+        return $this->belongsTo(AgencyUser::class, 'agency_user_id');
+    }
 }

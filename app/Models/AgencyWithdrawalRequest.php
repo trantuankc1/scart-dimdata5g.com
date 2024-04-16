@@ -27,6 +27,6 @@ class AgencyWithdrawalRequest extends Model
 
     public function agencyUser()
     {
-        return $this->belongsTo(AgencyUser::class);
+        return $this->belongsTo(AgencyUser::class, 'agency_user_id');
     }
 }
