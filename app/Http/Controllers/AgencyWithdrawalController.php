@@ -23,7 +23,7 @@ class AgencyWithdrawalController extends Controller
     public function index()
     {
         $agencyUserEarning = $this->getAgecyEarning();
-        $infoId = $this->getAgecyEarning()->agency_user_id;
+        $infoId = $agencyUserEarning ? $agencyUserEarning->agency_user_id : null;
         if ($infoId) {
             $transaction = AgencyWithdrawalRequest::query()->where('agency_user_id', $infoId)->orderBy('id', 'desc')->paginate(15);
         } else {

@@ -9,17 +9,19 @@
                 <h3 class="fw-bold">tổng kết doanh thu</h3>
                 <div class="total">
                     <span class="fw-bold"><i class="mdi mdi-cash"></i>  doanh số </span>
-                    <p>{{ number_format($agencyUserEarning->total_profit) }}</p>
+                    <p>{{ optional($agencyUserEarning)->total_profit ? number_format($agencyUserEarning->total_profit) : 'N/A' }}</p>
                 </div>
                 <div class="total">
                     <span class="fw-bold"><i class="mdi mdi-cash"></i>  lợi nhuận</span>
-                    <p>{{ number_format($agencyUserEarning->total_profit) }}</p>
+                    <p>{{ optional($agencyUserEarning)->total_profit ? number_format($agencyUserEarning->total_profit) : 'N/A' }}</p>
+
+
                 </div>
             </div>
             <div class="col box-total-money-by-month">
                 <h3 class="fw-bold">doanh thu tháng này</h3>
                 <p class="fw-bold"><i class="mdi mdi-cash"></i> tổng doanh thu theo tháng này</p>
-                <p>{{ number_format($agencyUserEarning->total_profit) }}</p>
+                <p>{{ optional($agencyUserEarning)->total_profit ? number_format($agencyUserEarning->total_profit) : 'N/A' }}</p>
             </div>
         </div>
         <div class="link mt-5">

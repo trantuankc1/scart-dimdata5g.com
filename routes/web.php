@@ -36,6 +36,10 @@ Route::prefix('agency')->middleware('checkLoginUserAgency')->group(function () {
 
     Route::get('/list-order-sim', [AgencyOrderSimController::class, 'index'])->name('agency_user.list_order_sim');
     Route::get('/create-order-sim', [AgencyOrderSimController::class, 'createOrderSim'])->name('agency_user.create_order_sim');
+    Route::post('process-order-sim', [AgencyOrderSimController::class, 'processCreateOrderSim'])->name('agency_user.process_order_sim');
+
+    Route::get('/edit-info-order-sim/{id}', [AgencyOrderSimController::class, 'editInfoOrderSim'])->name('agency_user.edit_info_order_sim');
+    Route::put('process-update-info-order-sim/{id}', [AgencyOrderSimController::class, 'processEditInfoOrderSim'])->name('agency_user.update_info_order_sim');
 
     Route::get('/link/{agencyUuid}', [AgencyDashBoardController::class, 'redirectPageFromAgency'])->name('redirect.from.agency');
 });
