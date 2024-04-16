@@ -13,6 +13,7 @@
         <div class="form-group">
             <label for="password">Mật khẩu:</label>
             <input type="password" name="password" id="password" class="form-control" >
+            <small style="color: red">để trống nếu không muốn thay đổi mật khẩu !</small>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>

@@ -56,7 +56,7 @@ class AgencyUser extends Model implements Authenticatable
 
     public function withdrawalRequests()
     {
-        return $this->hasMany(AgencyWithdrawalRequest::class);
+        return $this->hasMany(AgencyWithdrawalRequest::class, 'agency_user_id');
     }
 
     public function earnings()

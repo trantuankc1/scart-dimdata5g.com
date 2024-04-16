@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name_account_owner');
             $table->string('bank_account_number');
             $table->decimal('amount', 15, 2);
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->enum('status', ['new', 'processing', 'completed'])->default('new');
             $table->timestamps();
         });
     }

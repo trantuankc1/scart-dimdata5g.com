@@ -1,5 +1,6 @@
 <?php
 
+use App\Admin\Controllers\AdminBankRequestController;
 use App\Admin\Controllers\AdminListOrderSimController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyDashBoardController;
@@ -86,9 +87,14 @@ Route::group(
         /**
          * list or sim by agency user
          */
-
         Route::get('/list-order-sim', [AdminListOrderSimController::class, 'index'])->name('admin.list_order_sim');
         Route::put('/process-update-status-order-sim/{id}', [AdminListOrderSimController::class, 'updateOrderStatus'])->name('admin.process_update_status_order_sim');
+
+        /**
+         * list bank payment agency user
+         */
+        Route::get('/list-bank-request', [AdminBankRequestController::class, 'index'])->name('admin.bank_request');
+        Route::put('/update-bank-request/{id}', [AdminBankRequestController::class, 'updateStatusBankRequest'])->name('admin.update_status_bank_request');
     }
 );
 

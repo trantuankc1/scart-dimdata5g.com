@@ -20,7 +20,7 @@ class AgencyUserController extends Controller
 
     public function create()
     {
-        $agencies =  Agency::all();
+        $agencies = Agency::all();
 
         return view('agency_users.create', compact('agencies'));
     }
@@ -68,9 +68,8 @@ class AgencyUserController extends Controller
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'username' => 'required|unique:agency_users,username,'.$id,
-            'password' => 'required',
-            'email' => 'required|unique:agency_users,email,'.$id,
+            'username' => 'required|unique:agency_users,username,' . $id,
+            'email' => 'required|unique:agency_users,email,' . $id,
             'discount_rate' => 'required|numeric',
             'agency_id' => 'required|exists:agencies,id',
             'agency_level' => 'required|integer|min:1',
@@ -78,7 +77,12 @@ class AgencyUserController extends Controller
 
         $agencyUser = AgencyUser::findOrFail($id);
         $agencyUser->username = $request->input('username');
-        $agencyUser->password = bcrypt($request->input('password'));
+
+        // Kiểm tra xem mật khẩu đã được cung cấp trong request hay không
+        if ($request->has('password')) {
+            $agencyUser->password = bcrypt($request->input('password'));
+        }
+
         $agencyUser->email = $request->input('email');
         $agencyUser->agency_id = $request->input('agency_id');
         $agencyUser->agency_level = $request->input('agency_level');
@@ -86,7 +90,10 @@ class AgencyUserController extends Controller
 
         $commission = AgencyCommission::where('agency_user_id', $id)->first();
         $commission->commission_rate = $request->input('discount_rate');
-        $commission->save();
+        if ($request->has('discount_rate')) {
+            $commission->commission_rate = $request->input('discount_rate');
+            $commission->save();
+        }
 
         return redirect()->route('agency_users.index')->with('success', 'Cập nhật thông tin đại lý thành công.');
     }

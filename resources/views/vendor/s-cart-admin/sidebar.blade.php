@@ -117,17 +117,17 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-                                    @endif
-                                    {{-- end level 2 --}}
+            @endif
+            {{-- end level 2 --}}
 
-                                @endif
-                            @endforeach
-                            {{--  end level 1 --}}
+            @endif
+            @endforeach
+            {{--  end level 1 --}}
 
-                        @endif
-                    @endforeach
-                    {{-- end level 0 --}}
-                @endif
+            @endif
+            @endforeach
+            {{-- end level 0 --}}
+            @endif
 
             @if (\Admin::user()->checkUrlAllowAccess(route('admin_order.index')))
                 @include($templatePathAdmin.'component.sidebar_bottom')
@@ -274,19 +274,23 @@
                 @include($templatePathAdmin.'component.sidebar_bottom')
             @endif
         </nav>
-        <nav class="text-capitalize nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu">
+        <nav class="text-capitalize nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview"
+             role="menu">
             <ul class="nav-item has-treeview" style="list-style: none">
                 <li class="nav-item">
                     <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('agency.index') }}">Cấp đại lý</a>
                 </li>
                 <li>
-                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('agency_users.index') }}">danh sách Đại lý</a>
+                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('agency_users.index') }}">danh sách
+                        Đại lý</a>
                 </li>
                 <li>
-                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('admin.list_order_sim') }}">đơn hàng từ đại lý</a>
+                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('admin.list_order_sim') }}">đơn
+                        hàng từ đại lý</a>
                 </li>
                 <li>
-                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="#">thanh toán  đại lý</a>
+                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('admin.bank_request') }}">thanh
+                        toán đại lý</a>
                 </li>
             </ul>
         </nav>
