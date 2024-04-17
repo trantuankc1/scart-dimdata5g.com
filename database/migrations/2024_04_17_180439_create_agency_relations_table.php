@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('agency_relations', function (Blueprint $table) {
-                $table->id();
-                $table->uuid('parent_agency_id');
-                $table->uuid('child_agency_id');
-                $table->timestamps();
-            });
+            $table->uuid('id');
+            $table->uuid('parent_agency_id');
+            $table->uuid('child_agency_id');
+            $table->timestamps();
+        });
     }
 
     /**

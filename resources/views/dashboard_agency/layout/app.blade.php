@@ -20,7 +20,7 @@
     <link href="{{ asset('agency_css/dist/css/style.min.css') }}" rel="stylesheet"/>
     <style>
         body {
-            background-color: #fdfbfb;
+            background-color: #f5f7fa;
         }
     </style>
 </head>

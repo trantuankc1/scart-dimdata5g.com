@@ -2,6 +2,7 @@
 
 use App\Admin\Controllers\AdminBankRequestController;
 use App\Admin\Controllers\AdminListOrderSimController;
+use App\Http\Controllers\AgencyChildController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\AgencyDashBoardController;
 use App\Http\Controllers\AgencyOrderSimController;
@@ -41,6 +42,11 @@ Route::prefix('agency')->middleware('checkLoginUserAgency')->group(function () {
     Route::post('process-order-sim', [AgencyOrderSimController::class, 'processCreateOrderSim'])->name('agency_user.process_order_sim');
     Route::get('/edit-info-order-sim/{id}', [AgencyOrderSimController::class, 'editInfoOrderSim'])->name('agency_user.edit_info_order_sim');
     Route::put('process-update-info-order-sim/{id}', [AgencyOrderSimController::class, 'processEditInfoOrderSim'])->name('agency_user.update_info_order_sim');
+
+
+    Route::get('/agency-child', [AgencyChildController::class, 'index'])->name('agency_child.index');
+    Route::get('/agency-child-create', [AgencyChildController::class, 'create'])->name('agency_child.create');
+    Route::post('/process-child-create', [AgencyChildController::class, 'store'])->name('agency_child.process_store');
 
     Route::get('/link/{agencyUuid}', [AgencyDashBoardController::class, 'redirectPageFromAgency'])->name('redirect.from.agency');
 });

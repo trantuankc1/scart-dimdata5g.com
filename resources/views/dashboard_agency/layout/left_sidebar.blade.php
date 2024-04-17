@@ -35,16 +35,17 @@
                         ><span class="hide-menu">thanh toán</span></a
                     >
                 </li>
-
+                @if($agencyUser->agency_level == 1)
                 <li class="sidebar-item">
                     <a
-                            class="sidebar-link waves-effect waves-dark sidebar-link"
-                            href="#"
+                            class="sidebar-link waves-effect waves-dark sidebar-link {{ request()->is('agency/agency-child') ? 'active' : '' }}"
+                            href="{{ route('agency_child.index') }}"
                             aria-expanded="false"
                     ><i class="mdi mdi-pencil"></i
                         ><span class="hide-menu">Tạo mới một cấp đại lý</span></a
                     >
                 </li>
+                @endif
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
