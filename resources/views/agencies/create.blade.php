@@ -1,9 +1,9 @@
 @extends($templatePathAdmin.'layout')
 
 @section('main')
-    <div class="container">
-        <h3 class="text-capitalize">Tạo cấp đại lý</h3>
-        <form class="#" method="post" action="{{ route('agency.store') }}">
+    <div class="container card" style="padding-bottom: 10px">
+        <h3 class="text-capitalize text-center">Tạo cấp đại lý</h3>
+        <form class="mt-4" method="post" action="{{ route('agency.store') }}">
             @csrf
 
             <div class="input-group input-group-lg">
@@ -17,7 +17,7 @@
                 <small class="text-muted">Nhập số nguyên dương</small>
             </div>
 
-            <button class="btn btn-success mt-2 text-capitalize" type="submit">gửi</button>
+            <button class="btn btn-success mt-2 text-capitalize" type="submit" style="width: 10%">gửi</button>
         </form>
     </div>
 @endsection

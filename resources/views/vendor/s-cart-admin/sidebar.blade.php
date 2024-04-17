@@ -274,22 +274,32 @@
                 @include($templatePathAdmin.'component.sidebar_bottom')
             @endif
         </nav>
+
+
         <nav class="text-capitalize nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview"
              role="menu">
-            <ul class="nav-item has-treeview" style="list-style: none">
-                <li class="nav-item">
-                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('agency.index') }}">Cấp đại lý</a>
+            <ul class="nav nav-pills nav-sidebar flex-column nav-legacy" style="list-style: none">
+                <li class="nav-link header">
+                    <i class="nav-icon  fas fa-cogs "></i>
+                    <p class="sub-header text-capitalize"> hệ thống đại lý</p>
                 </li>
-                <li>
-                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('agency_users.index') }}">danh sách
+                <li class="nav-item has-treeview">
+                    <a class="nav-link" href="{{ route('agency.index') }}"><i
+                                class="nav-icon  {{ $level2->icon }} "></i>Cấp đại lý</a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a class="nav-link" href="{{ route('agency_users.index') }}"> <i
+                                class="nav-icon  {{ $level2->icon }} "></i> danh sách
                         Đại lý</a>
                 </li>
-                <li>
-                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('admin.list_order_sim') }}">đơn
+                <li class="nav-item has-treeview">
+                    <a class="nav-link" href="{{ route('admin.list_order_sim') }}"><i
+                                class="nav-icon  {{ $level2->icon }} "></i> đơn
                         hàng từ đại lý</a>
                 </li>
-                <li>
-                    <i class="nav-icon  {{ $level1->icon }} "></i> <a href="{{ route('admin.bank_request') }}">thanh
+                <li class="nav-item has-treeview">
+                    <a class="nav-link" href="{{ route('admin.bank_request') }}"> <i
+                                class="nav-icon  {{ $level2->icon }} "></i> thanh
                         toán đại lý</a>
                 </li>
             </ul>

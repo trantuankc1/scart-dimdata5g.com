@@ -1,6 +1,6 @@
 @extends('dashboard_agency.layout.app')
 @section('content')
-    <div class="container">
+    <div class="container card" style="padding-bottom: 10px">
         <h2 class="text-capitalize text-center">tạo mới đơn hàng</h2>
         <form id="orderForm" action="{{ route('agency_user.process_order_sim') }}" method="post">
             @csrf

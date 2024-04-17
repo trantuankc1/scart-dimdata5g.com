@@ -2,7 +2,7 @@
 @extends($templatePathAdmin.'layout')
 
 @section('main')
-    <div class="container-fluid">
+    <div class="container-fluid card">
         <h3 class="text-center text-capitalize">thanh toán đại lý</h3>
 
         <table class="table table-hover table-bordered">
@@ -37,7 +37,7 @@
                         <form action="{{ route('admin.update_status_bank_request', $request->id) }}" method="post">
                             @csrf
                             @method('PUT')
-                            <select name="status" class="form-select" aria-label="Default select example">
+                            <select name="status" class="form-select form-select-sm" aria-label="Default select example">
                                 <option value="new" {{ $request->status == 'new' ? 'selected' : '' }}>new</option>
                                 <option value="processing" {{ $request->status == 'processing' ? 'selected' : '' }}>processing</option>
                                 <option value="completed" {{ $request->status == 'completed' ? 'selected' : '' }}>completed</option>

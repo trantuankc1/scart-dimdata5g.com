@@ -11,6 +11,10 @@ class AgencyOrderSimController extends Controller
     {
         $userData = session('agency_user');
         $agencyId = $userData['id'];
+        $agencyUser = session('agency_user');
+        if ($agencyUser && $agencyUser->agency_level != 1) {
+            abort(403, 'Bạn không có quyền truy cập trang này.');
+        }
 
         $transaction = AgencyOrderSim::query()
             ->where('agency_user_id', $agencyId)

@@ -1,6 +1,6 @@
 @extends('dashboard_agency.layout.app')
 @section('content')
-    <div class="container text-center page-breadcrumb text-capitalize">
+    <div class="container text-center page-breadcrumb text-capitalize card">
         <h3>yêu cầu rút tiền</h3>
         <div class="container box-total-money-by-month">
             <form id="withdrawForm" action=" {{ route('agency_user.update_info_bank', $transaction->id) }}" method="POST">

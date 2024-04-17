@@ -1,6 +1,6 @@
 @extends('dashboard_agency.layout.app')
 @section('content')
-    <div class="container text-center page-breadcrumb text-capitalize">
+    <div class="container text-center page-breadcrumb text-capitalize card">
         <h3>yêu cầu rút tiền</h3>
         <div class="row">
             <div class="col-md-6">

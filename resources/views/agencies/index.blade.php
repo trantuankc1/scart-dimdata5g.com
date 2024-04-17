@@ -1,10 +1,10 @@
 @extends($templatePathAdmin.'layout')
 
 @section('main')
-    <div class="container">
+    <div class="container-fluid card ">
         <h2 class="text-capitalize text-center">cấp Đại Lý</h2>
-        <a class="btn btn-success text-capitalize" href="{{ route('agency.create') }}">tạo cấp đại lý</a>
-        <table class="table table-bordered table-hover">
+        <a class="btn btn-success text-capitalize" style="width: 20%" href="{{ route('agency.create') }}">tạo cấp đại lý</a>
+        <table class="table table-bordered table-hover text-center">
             <tr class="text-capitalize">
                 <td>id</td>
                 <td>mô tả</td>

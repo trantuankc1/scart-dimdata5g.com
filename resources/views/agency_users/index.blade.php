@@ -2,7 +2,7 @@
 
 @section('main')
 
-    <div class="container">
+    <div class="container card">
         <div class="row">
             <div class="col-md-12">
                 <h3 class="text-capitalize text-center">danh sách đại lý</h3>
