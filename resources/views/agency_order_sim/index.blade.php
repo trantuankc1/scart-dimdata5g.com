@@ -1,6 +1,6 @@
 @extends('dashboard_agency.layout.app')
 @section('content')
-    <div class="container card">
+    <div class="container card mt-3">
         <h2 class="text-capitalize text-center">danh sách lô sim đã tạo</h2>
         <a href="{{ route('agency_user.create_order_sim') }}" style="width: 20%" class="btn btn-info text-capitalize">tạo đơn hàng mới</a>
         @if(session('create_order_success'))

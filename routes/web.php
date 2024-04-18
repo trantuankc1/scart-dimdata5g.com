@@ -47,6 +47,7 @@ Route::prefix('agency')->middleware('checkLoginUserAgency')->group(function () {
     Route::get('/agency-child', [AgencyChildController::class, 'index'])->name('agency_child.index');
     Route::get('/agency-child-create', [AgencyChildController::class, 'create'])->name('agency_child.create');
     Route::post('/process-child-create', [AgencyChildController::class, 'store'])->name('agency_child.process_store');
+    Route::get('/agency-child-edit/{id}', [AgencyChildController::class, 'edit'])->name('agency_child.edit');
 
     Route::get('/link/{agencyUuid}', [AgencyDashBoardController::class, 'redirectPageFromAgency'])->name('redirect.from.agency');
 });

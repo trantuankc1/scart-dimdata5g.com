@@ -16,7 +16,17 @@ class AgencyChildController extends Controller
      */
     public function index()
     {
-        return view('agency_child.index');
+        $userData = session('agency_user');
+        $parentAgencyId = $userData['id'];
+
+        $agencyChildren = AgencyRelation::where('parent_agency_id', $parentAgencyId)
+            ->join('agency_users', 'agency_relations.child_agency_id', '=', 'agency_users.id')
+            ->join('agency_commissions', 'agency_users.id', '=', 'agency_commissions.agency_user_id')
+            ->select('agency_users.*', 'agency_commissions.commission_rate')
+            ->get();
+
+
+        return view('agency_child.index', compact('agencyChildren'));
     }
 
     /**
@@ -83,19 +93,18 @@ class AgencyChildController extends Controller
         return redirect()->route('agency_child.index');
     }
 
+    public function edit($id)
+    {
+        $agency = AgencyUser::query()->findOrFail($id);
+
+        return view('agency_child.edit', compact('agency'));
+    }
+
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
         //
     }

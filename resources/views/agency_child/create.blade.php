@@ -6,7 +6,7 @@
         <form id="agency_user_form" action="{{ route('agency_child.process_store') }}" method="post">
             @csrf
             @method('POST')
-            <input type="hidden" name="parent_agency_id" value="{{ $parentAgencyId['id']}}">
+            <input type="hidden" name="parent_agency_id" value="{{ is_array($parentAgencyId) ? $parentAgencyId['id'] : $parentAgencyId }}">
 
             <div class="form-group">
                 <label for="username">Tên Đại Lý:</label>
