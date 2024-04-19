@@ -6,7 +6,7 @@
             <div class="col-md-6">
                 <div class="col box-total-money-by-month box-total">
                     <p class="fw-bold"><i class="mdi mdi-cash"></i> số dư được rút</p>
-                    <p>{{ number_format($agencyUserEarning->total_profit) }}</p>
+                    <p>{{ number_format(optional($agencyUserEarning)->total_profit ?? 0) }}</p>
                 </div>
             </div>
 
@@ -50,6 +50,7 @@
             </div>
         </div>
         <div class="container mt-2">
+            @if(isset($transaction) && !is_null($transaction))
             <table class="table table-hover table-bordered">
                 <tr>
                     <td>STT</td>
@@ -63,7 +64,9 @@
                 </tr>
                 <tbody>
                 @php $stt = 1; @endphp
-                @foreach($transaction as $infoTransaction)
+                @if(isset($transaction) && !is_null($transaction))
+
+                    @foreach($transaction as $infoTransaction)
                     <tr>
                         <td>{{ $stt++ }}</td>
                         <td>{{ $infoTransaction->agency_user_id }}</td>
@@ -76,10 +79,11 @@
                         <td><a href="{{ route('agency_user.edit_info_bank', $infoTransaction->id) }}" class="btn btn-info">Sửa</a></td>
                     </tr>
                 @endforeach
+                @endif
                 </tbody>
             </table>
             {{ $transaction->links('vendor.pagination.bootstrap-4') }}
-
+            @endif
         </div>
     </div>
     <style>
