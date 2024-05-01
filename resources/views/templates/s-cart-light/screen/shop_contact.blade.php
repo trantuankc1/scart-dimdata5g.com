@@ -117,3 +117,9 @@ $layout_page = shop_contact
 @push('scripts')
 {{-- //script here --}}
 @endpush
+
+<style>
+    .swal2-container{
+        margin-top: 50px;
+    }
+</style>

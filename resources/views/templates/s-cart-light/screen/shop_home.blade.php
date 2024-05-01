@@ -55,3 +55,9 @@ Use paginate: $products->appends(request()->except(['page','_token']))->links()
 @push('scripts')
 <!-- //script here -->
 @endpush
+
+<style>
+  .swal2-container{
+    margin-top: 55px;
+  }
+</style>

@@ -3,3 +3,4 @@
 @section('main')
   {!! $content??'' !!}
 @endsection
+

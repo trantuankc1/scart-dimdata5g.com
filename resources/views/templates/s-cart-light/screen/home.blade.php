@@ -19,3 +19,9 @@ $layout_page = home
 @push('scripts')
 {{-- //script here --}}
 @endpush
+
+<style>
+    .swal2-container{
+        margin-top: 50px;
+    }
+</style>

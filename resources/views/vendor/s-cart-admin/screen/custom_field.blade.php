@@ -5,7 +5,6 @@
     $id = empty($id) ? 0 : $id;
 @endphp
 <div class="row">
-@dd(1)
   <div class="col-md-5">
     <div class="card">
       <div class="card-header">

@@ -46,6 +46,15 @@
                     >
                 </li>
                 @endif
+
+                <li class="sidebar-item">
+                    <a
+                            class="sidebar-link {{ request()->is('agency/all-order-system') ? 'active' : '' }} waves-effect waves-dark sidebar-link"
+                            href="{{ route('agency_user.list_order_system') }}"
+                    ><i class="mdi mdi-view-dashboard"></i
+                        ><span class="hide-menu">đơn hàng toàn hệ thống</span></a
+                    >
+                </li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->

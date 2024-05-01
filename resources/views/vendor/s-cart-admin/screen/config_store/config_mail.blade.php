@@ -32,12 +32,6 @@
                 </tr>
 
                </tbody>
-               <tfoot>
-                 <tr>
-                  <td colspan="2">{!! sc_language_render('email.email_action.help_note') !!}</td>
-                </tr>
-
-              </tfoot>
              </table>
           </div>
         </div>

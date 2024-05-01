@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AgencyOrderEsim;
 use App\Models\AgencyOrderSim;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use SCart\Core\Front\Models\ShopOrder;
 
 class AgencyOrderSimController extends Controller
 {
@@ -22,6 +25,13 @@ class AgencyOrderSimController extends Controller
             ->paginate(15);
 
         return view('agency_order_sim.index', compact('transaction'));
+    }
+
+    public function allOrderSystem()
+    {
+        $all_order = ShopOrder::query()->paginate(20);
+
+        return view('agency_order_sim.all_order', compact('all_order'));
     }
 
     public function createOrderSim(Request $request)
@@ -52,6 +62,10 @@ class AgencyOrderSimController extends Controller
         $order->phone = $request->input('phone');
 
         $order->save();
+
+        $adminEmail = 'simdata5g@simdata5g.com'; // Thay đổi địa chỉ email admin tại đây
+        Mail::to($adminEmail)->send(new AgencyOrderEsim($order));
+
 
         return redirect()->route('agency_user.list_order_sim')->with('create_order_success', 'tạo đơn hàng thành công');
     }

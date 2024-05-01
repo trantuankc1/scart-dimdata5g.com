@@ -78,3 +78,9 @@ $layout_page = shop_cart
 @push('styles')
 {{-- Your css style --}}
 @endpush
+
+<style>
+    .swal2-container{
+        margin-top: 50px;
+    }
+</style>
