@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Route::post('api/sepay/webhook', [\App\Plugins\Payment\Sepay\Controllers\FrontController::class, 'processResponse'])->name('sepay.webhook');
+
 Route::get('/agency-login', [AgencyUserLogin::class, 'formLogin'])->name('agency_users.login');
 Route::post('/agency-login', [AgencyUserLogin::class, 'login'])->name('agency_users.login');
 Route::get('/logout', [AgencyUserLogin::class, 'logoutAgencyUser'])->name('agency_users.logout');

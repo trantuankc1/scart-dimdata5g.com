@@ -33,6 +33,10 @@ class EventServiceProvider extends ServiceProvider
         \Illuminate\Auth\Events\Login::class => [
             \App\Listeners\ProcessLogin::class,
         ],
+
+        \SePay\SePay\Events\SePayWebhookEvent::class => [
+            \App\Listeners\SePayWebhookListener::class,
+        ],
     ];
 
     /**
