@@ -1,7 +1,25 @@
 <?php
 return [
     'title'      => 'Sepay',
-    'admin'      => [
-        'title'          => 'Sepay',
-    ],
+    'process_invalid' => 'Process invalid',
+    'error_number' => 'Error payment. Code :code',
+    'sepay_env'                    => 'Enviroment',
+    'ten_ngan_hang'                    => 'Ngân hàng',
+    'chu_tai_khoan'                    => 'Chủ tài khoản',
+    'so_tai_khoan'                    => 'Số Tài khoản',
+    'tien_to_thanh_toan'                    => 'Tiền tố mã thanh toán',
+    'webhook_url'                    => 'Webhook URL',
+    'ma_bao_mat'                    => 'Mã bảo mật webhook',
+    'sepay_load_config'            => 'Load config from',
+    'sepay_urlApi'             => 'Link payment',
+    'sepay_secretKey'             => 'Secrect key',
+    'sepay_partnerCode'             => 'Partner code',
+    'sepay_order_status_success'   => 'Order status when success',
+    'sepay_order_status_faild'       => 'Order status when faild',
+    'sepay_payment_status'             => 'Payment status when success',
+    'data_response_not_match'       => 'Data response not match :field',
+    'currency_not_allow' => 'Can not use :currency for this payment method.',
+    'currency_only_allow' => 'Curency only allow in [:list]',
+    'config_field'            => 'Field',
+    'config_value'            => 'Value',
 ];

@@ -1,10 +1,10 @@
 @extends($sc_templatePath.'.layout')
 @section('block_main')
     <div class="container">
-        <div class="qr-code">
+        <div class="qr-code" style="font-size: 17px">
             <div class="mt-1">
                 <p>Cách 1: Mở app ngân hàng/ Ví để <span class="fw-bold" style="font-weight: bold">quét mã QR</span></p>
-                <img src="{{ $qrUrl }}" alt="QR Code for Payment" width="150">
+                <img src="{{ $qrUrl }}" alt="QR Code for Payment" width="250">
             </div>
             <div class="mt-2">
                 <p>Cách 2: Chuyển khoản thủ công theo thông tin</p>

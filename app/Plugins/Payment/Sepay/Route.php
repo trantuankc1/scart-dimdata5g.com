@@ -2,35 +2,24 @@
 /**
  * Route front
  */
-
-use Illuminate\Support\Facades\Route;
-
-if (sc_config('Sepay')) {
-    Route::group(
-        [
-            'prefix' => 'plugin/sepay',
-            'namespace' => 'App\Plugins\Payment\Sepay\Controllers',
-        ],
-        function () {
-            Route::get('index', 'FrontController@index')
-                ->name('sepay.index');
-        }
-
-    );
-}
-
-
-/**
- * Route admin
- */
+if(sc_config('Sepay')) {
 Route::group(
     [
-        'prefix' => SC_ADMIN_PREFIX . '/sepay',
-        'middleware' => SC_ADMIN_MIDDLEWARE,
-        'namespace' => 'App\Plugins\Payment\Sepay\Admin',
+        'prefix'    => 'sepay',
+        'namespace' => 'App\Plugins\Payment\Sepay\Controllers',
     ],
     function () {
-        Route::get('/', 'AdminController@index')
-            ->name('admin_sepay.index');
+        Route::get('index', 'FrontController@index')
+        ->name('sepay.index');
+        Route::get('sepayqr', 'FrontController@sepayqr')
+        ->name('sepay.sepayqr');
+        Route::post('process-form', 'FrontController@processForm')
+        ->name('sepay.process_form');
+        Route::post('webhook', 'FrontController@webhook')->name('sepay.webhook');
+        Route::post('checkorder', 'FrontController@checkorder')->name('sepay.checkorder');
+        Route::get('process', 'FrontController@processResponse')
+        ->name('sepay.process');
     }
+    
 );
+}

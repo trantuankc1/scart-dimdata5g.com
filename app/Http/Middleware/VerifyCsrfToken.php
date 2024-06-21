@@ -12,6 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'api/sepay/webhook',
+        '/sepay/webhook',
+        '/sepay/checkorder',
     ];
 }

@@ -1,25 +1,42 @@
 <?php
 /**
- * Plugin format 3.0
- * Use for S-cart 7.x
+ * AppConfig Vnpay basic
+ * User for Vnpay api v2.0
+ * http://sandbox.sepayment.vn/paymentv2/vpcpay.html
+ *
+ * @package    App\Plugins\Payment\Sepay
+ * @subpackage AppConfig
+ * @copyright  Copyright (c) 2020 SCart ecommerce.
+ * @author     Lanh le <lanhktc@gmail.com>
  */
 #App\Plugins\Payment\Sepay\AppConfig.php
 namespace App\Plugins\Payment\Sepay;
 
 use App\Plugins\Payment\Sepay\Models\PluginModel;
 use SCart\Core\Admin\Models\AdminConfig;
+use SCart\Core\Front\Models\ShopOrderStatus;
+use SCart\Core\Front\Models\ShopPaymentStatus;
 use App\Plugins\ConfigDefault;
 class AppConfig extends ConfigDefault
 {
+    public $currencyAllow;
+    public $urlApi;
+    private $secretKey;
+    private $partnerCode;
+
+    const ORDER_STATUS_PROCESSING = 2; // Processing
+    const ORDER_STATUS_FAILD = 6; // Failed
+    const PAYMENT_STATUS = 3; // Paid
+
     public function __construct()
     {
+        //die('33');
         //Read config from config.json
         $config = file_get_contents(__DIR__.'/config.json');
         $config = json_decode($config, true);
     	$this->configGroup = $config['configGroup'];
     	$this->configCode = $config['configCode'];
         $this->configKey = $config['configKey'];
-        $this->scartVersion = $config['scartVersion'];
         //Path
         $this->pathPlugin = $this->configGroup . '/' . $this->configCode . '/' . $this->configKey;
         //Language
@@ -30,6 +47,27 @@ class AppConfig extends ConfigDefault
         $this->version = $config['version'];
         $this->auth = $config['auth'];
         $this->link = $config['link'];
+
+        
+        $this->currencyAllow = ['VND'];
+        //Process Payment
+        $this->secretKey = sc_config('sepay_secretKey');
+        $this->partnerCode = sc_config('sepay_partnerCode');
+        $this->urlApi = sc_config('sepay_urlApi');
+    }
+
+    /**
+     * Get secrectkey
+     */
+    public function getSecretKey() {
+        return $this->secretKey;
+    }
+
+    /**
+     * Get partnerCode
+     */
+    public function getPartnerCode() {
+        return $this->partnerCode;
     }
 
     public function install()
@@ -38,48 +76,73 @@ class AppConfig extends ConfigDefault
         $check = AdminConfig::where('key', $this->configKey)->first();
         if ($check) {
             //Check Plugin key exist
-            $return = ['error' => 1, 'msg' =>  sc_language_render('admin.plugin.plugin_exist')];
+            $return = ['error' => 1, 'msg' => 'Plugin exist'];
         } else {
             //Insert plugin to config
             $dataInsert = [
                 [
-                    'group'  => $this->configGroup,
-                    'code'   => $this->configCode,
-                    'key'    => $this->configKey,
-                    'sort'   => 0,
-                    'value'  => self::ON, //Enable extension
+                    'group' => $this->configGroup,
+                    'code' => $this->configCode,
+                    'key' => $this->configKey,
+                    'sort' => 0,
+                    'value' => self::ON, //Enable extension
                     'detail' => $this->pathPlugin.'::lang.title',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'sepay_urlApi',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => 'http://sandbox.sepayment.vn/paymentv2/vpcpay.html',
+                    'detail' => $this->pathPlugin.'::lang.sepay_urlApi',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'sepay_secretKey',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => '',
+                    'detail' => $this->pathPlugin.'::lang.sepay_secretKey',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'sepay_partnerCode',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => '',
+                    'detail' => $this->pathPlugin.'::lang.sepay_partnerCode',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'sepay_order_status_faild',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => self::ORDER_STATUS_FAILD,
+                    'detail' => $this->pathPlugin.'::lang.sepay_order_status_faild',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'sepay_order_status_success',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => self::ORDER_STATUS_PROCESSING,
+                    'detail' => $this->pathPlugin.'::lang.sepay_order_status_success',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'sepay_payment_status',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => self::PAYMENT_STATUS,
+                    'detail' => $this->pathPlugin.'::lang.sepay_payment_status',
                 ],
             ];
             $process = AdminConfig::insert(
                 $dataInsert
             );
 
-            /*Insert plugin's html elements into index of admin pages
-            Detail: https://s-cart.org/docs/master/create-new-a-plugin.html 
-            */
-
-            // AdminConfig::insert(
-            //     [
-            //         /*
-            //         This is where the html content of the Plugin appears
-            //         group_of_layout allow:
-            //         Position include "topMenuRight, topMenuLeft, menuLeft,menuRight, blockBottom" -> Show on all index pages in admin with corresponding position as above.
-            //         or Position_route_name_of_admin_page. Example menuLeft__admin_product.index, topMenuLeft__admin_order.index
-            //         */
-            //         'group' => 'group_of_layout',
-            //         /*
-            //         code is value option
-            //         */
-            //         'code' => 'code_config_of_plugin',
-            //         'key' => 'key_with_value_unique', //
-            //         'sort' => 0, // int value
-            //         'value' => 'html content or view::path_to_view', // allow html or view::path_to_view
-            //         'detail' => '',
-            //     ]
-            // );
             if (!$process) {
-                $return = ['error' => 1, 'msg' => sc_language_render('admin.plugin.install_faild')];
+                $return = ['error' => 1, 'msg' => 'Error when install'];
             } else {
                 $return = (new PluginModel)->installExtension();
             }
@@ -92,12 +155,10 @@ class AppConfig extends ConfigDefault
     {
         $return = ['error' => 0, 'msg' => ''];
         //Please delete all values inserted in the installation step
-        $process = (new AdminConfig)
-            ->where('key', $this->configKey)
-            ->orWhere('code', $this->configKey.'_config')
-            ->delete();
-        if (!$process) {
-            $return = ['error' => 1, 'msg' => sc_language_render('admin.plugin.action_error', ['action' => 'Uninstall'])];
+        $process = (new AdminConfig)->where('key', $this->configKey)->delete();
+        $process2 = (new AdminConfig)->where('code', $this->configKey.'_config')->delete();
+        if (!$process && $process2) {
+            $return = ['error' => 1, 'msg' => 'Error when uninstall'];
         }
         (new PluginModel)->uninstallExtension();
         return $return;
@@ -127,8 +188,17 @@ class AppConfig extends ConfigDefault
 
     public function config()
     {
-        //redirect to url config of plugin
-        return;
+        $breadcrumb['url'] = sc_route_admin('admin_plugin', ['code' => $this->configCode]);
+        $breadcrumb['name'] = sc_language_render('plugin.' . $this->configCode.'_plugin');
+        return view($this->pathPlugin . '::Admin')->with(
+            [
+                'code' => $this->configCode,
+                'key' => $this->configKey,
+                'title' => $this->title,
+                'breadcrumb' => $breadcrumb,
+                'jsonStatusOrder' => json_encode(ShopOrderStatus::getIdAll()),
+                'jsonPaymentStatus' => json_encode(ShopPaymentStatus::getIdAll()),
+            ]);
     }
 
     public function getData()
@@ -142,7 +212,6 @@ class AppConfig extends ConfigDefault
             'version' => $this->version,
             'auth' => $this->auth,
             'link' => $this->link,
-            'value' => 0, // this return need for plugin shipping
             'pathPlugin' => $this->pathPlugin
         ];
 
