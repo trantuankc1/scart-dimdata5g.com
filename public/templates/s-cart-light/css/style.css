@@ -3715,7 +3715,7 @@ html .group-custom > * {
 	flex: 0 0 auto;
 	max-width: 100%;
 }
-	
+
 .unit-spacing-0 {
 	margin-bottom: 0;
 	margin-left: 0;
@@ -16678,14 +16678,14 @@ h3 + .card-group-corporate {
 	}
 }
 
-/* 
+/*
  * 	Owl Carousel - Auto Height Plugin
  */
 .owl-height {
 	transition: height 500ms ease-in-out;
 }
 
-/* 
+/*
  *  Core Owl Carousel CSS File
  */
 .owl-carousel {
@@ -16769,7 +16769,7 @@ h3 + .card-group-corporate {
 	display: block;
 }
 
-/* 
+/*
  * 	Owl Carousel - Lazy Load Plugin
  */
 .owl-carousel .owl-item .owl-lazy {
@@ -16777,7 +16777,7 @@ h3 + .card-group-corporate {
 	transition: opacity 400ms ease;
 }
 
-/* 
+/*
  * 	Owl Carousel - Video Plugin
  */
 .owl-carousel .owl-video-wrapper {

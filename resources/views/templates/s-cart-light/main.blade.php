@@ -42,6 +42,32 @@
             position: relative;
             z-index: 1;
         }
+        .rd-navbar-nav-wrap{
+            font-family: "Roboto", sans-serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+        .product{
+            font-family: "Roboto", sans-serif !important;
+            font-weight: 700 !important;;
+            font-style: normal !important;;
+        }
+        .sim_data_qa_phone_support{
+            color: black;
+            font-family: "Roboto", sans-serif;
+            font-style: normal;
+            font-weight: bolder;
+
+        }
+        .button-secondary{
+            font-weight: bold;
+        }
+        .bg-default{
+            font-family: "Roboto", sans-serif;
+            font-weight: 550;
+            font-style: normal;
+            color: black;
+        }
 
         html.ie-10 .ie-panel, html.lt-ie-10 .ie-panel {
             display: block;
