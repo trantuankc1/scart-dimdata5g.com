@@ -4,15 +4,15 @@
  * User for Vnpay api v2.0
  * http://sandbox.sepayment.vn/paymentv2/vpcpay.html
  *
- * @package    App\Plugins\Payment\Sepay
+ * @package    App\Plugins\Payment\SepayBasic
  * @subpackage AppConfig
  * @copyright  Copyright (c) 2020 SCart ecommerce.
  * @author     Lanh le <lanhktc@gmail.com>
  */
-#App\Plugins\Payment\Sepay\AppConfig.php
-namespace App\Plugins\Payment\Sepay;
+#App\Plugins\Payment\SepayBasic\AppConfig.php
+namespace App\Plugins\Payment\SepayBasic;
 
-use App\Plugins\Payment\Sepay\Models\PluginModel;
+use App\Plugins\Payment\SepayBasic\Models\PluginModel;
 use SCart\Core\Admin\Models\AdminConfig;
 use SCart\Core\Front\Models\ShopOrderStatus;
 use SCart\Core\Front\Models\ShopPaymentStatus;
@@ -91,26 +91,50 @@ class AppConfig extends ConfigDefault
                 [
                     'group' => '',
                     'code' => $this->configKey.'_config',
-                    'key' => 'sepay_urlApi',
+                    'key' => 'ten_ngan_hang',
                     'sort' => 0, // Sort extensions in group
-                    'value' => 'http://sandbox.sepayment.vn/paymentv2/vpcpay.html',
-                    'detail' => $this->pathPlugin.'::lang.sepay_urlApi',
+                    'value' => '',
+                    'detail' => $this->pathPlugin.'::lang.ten_ngan_hang',
                 ],
                 [
                     'group' => '',
                     'code' => $this->configKey.'_config',
-                    'key' => 'sepay_secretKey',
+                    'key' => 'so_tai_khoan',
                     'sort' => 0, // Sort extensions in group
                     'value' => '',
-                    'detail' => $this->pathPlugin.'::lang.sepay_secretKey',
+                    'detail' => $this->pathPlugin.'::lang.so_tai_khoan',
                 ],
                 [
                     'group' => '',
                     'code' => $this->configKey.'_config',
-                    'key' => 'sepay_partnerCode',
+                    'key' => 'chu_tai_khoan',
                     'sort' => 0, // Sort extensions in group
                     'value' => '',
-                    'detail' => $this->pathPlugin.'::lang.sepay_partnerCode',
+                    'detail' => $this->pathPlugin.'::lang.chu_tai_khoan',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'tien_to_thanh_toan',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => '',
+                    'detail' => $this->pathPlugin.'::lang.tien_to_thanh_toan',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'webhook_url',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => '',
+                    'detail' => $this->pathPlugin.'::lang.webhook_url',
+                ],
+                [
+                    'group' => '',
+                    'code' => $this->configKey.'_config',
+                    'key' => 'ma_bao_mat',
+                    'sort' => 0, // Sort extensions in group
+                    'value' => '',
+                    'detail' => $this->pathPlugin.'::lang.ma_bao_mat',
                 ],
                 [
                     'group' => '',

@@ -1,6 +1,6 @@
 <?php
 return [
-    'title'      => 'Sepay',
+    'title'      => 'SepayBasic',
     'process_invalid' => 'Process invalid',
     'error_number' => 'Error payment. Code :code',
     'sepay_env'                    => 'Enviroment',

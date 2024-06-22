@@ -1,12 +1,12 @@
 {
-    "name": "Sepay module",
+    "name": "SepayBasic module",
     "image": "images/sepay.png",
     "auth": "Tuan Nguyen",
-    "email": "lanhktc@gmail.com",
-    "link": "https://sepay.vn/",
+    "email": "trantuankc1@gmail.com",
+    "link": "https://facebook.com/Tuan128ns/",
     "configGroup": "Plugins",
     "configCode": "Payment",
-    "configKey": "Sepay",
+    "configKey": "SepayBasic",
     "version": "7.2",
     "scartVersion": "7.1|7.2|8.0|8.1|8.2|9.0"
 }

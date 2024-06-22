@@ -1,6 +1,6 @@
 <?php
-#App\Plugins\Payment\Sepay\Models\PluginModel.php
-namespace App\Plugins\Payment\Sepay\Models;
+#App\Plugins\Payment\SepayBasic\Models\PluginModel.php
+namespace App\Plugins\Payment\SepayBasic\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

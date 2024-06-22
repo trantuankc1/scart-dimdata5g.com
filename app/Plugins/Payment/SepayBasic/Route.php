@@ -2,11 +2,11 @@
 /**
  * Route front
  */
-if(sc_config('Sepay')) {
+if(sc_config('SepayBasic')) {
 Route::group(
     [
         'prefix'    => 'sepay',
-        'namespace' => 'App\Plugins\Payment\Sepay\Controllers',
+        'namespace' => 'App\Plugins\Payment\SepayBasic\Controllers',
     ],
     function () {
         Route::get('index', 'FrontController@index')

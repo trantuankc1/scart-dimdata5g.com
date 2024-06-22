@@ -1,6 +1,6 @@
 <?php
 return [
-    'title'      => 'Sepay',
+    'title'      => 'SepayBasic',
     'process_invalid' => 'Xử lý không hợp lệ',
     'error_number' => 'Lỗi khi thanh toán. Mã lỗi :code',
     'sepay_env'                    => 'Môi trường',

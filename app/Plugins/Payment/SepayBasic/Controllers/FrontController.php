@@ -1,8 +1,8 @@
 <?php
-#App\Plugins\Payment\Sepay\Controllers\FrontController.php
-namespace App\Plugins\Payment\Sepay\Controllers;
+#App\Plugins\Payment\SepayBasic\Controllers\FrontController.php
+namespace App\Plugins\Payment\SepayBasic\Controllers;
 
-use App\Plugins\Payment\Sepay\AppConfig;
+use App\Plugins\Payment\SepayBasic\AppConfig;
 use SCart\Core\Front\Models\ShopOrder;
 use SCart\Core\Front\Controllers\ShopCartController;
 use SCart\Core\Front\Controllers\RootFrontController;
@@ -55,15 +55,16 @@ class FrontController extends RootFrontController
         $dataResponse = request()->all();
 
         $orderID = $this->extractCode( $dataResponse['content']);
-      //  dd($orderID);
+        $order = ShopOrder::find($this->convertFormat($orderID));
 
-
-       // dd(ShopOrder::find($this->convertFormat($orderID)));
+       //dd();
+       if( $order['total'] ==  $dataResponse['transferAmount']){
         ShopOrder::find($this->convertFormat($orderID))->update([
             'transaction' => $dataResponse['content'], 
             'status' => sc_config('sepay_order_status_success', 2),
             'payment_status' => sc_config('sepay_payment_status', 3)
             ]);
+           // dd($orderID);
 
         //Add history
         $dataHistory = [
@@ -76,6 +77,10 @@ class FrontController extends RootFrontController
         //Complete order
         // redirect(sc_route('order.success'));
         return response('ok');
+       }else{
+        return redirect(sc_route('sepay.sepayqr'))->with(['error' => "Vui lòng chuyển khoản đủ tiền"]);
+       }
+       
     }
 
     public function checkorder(Request $request){
@@ -105,17 +110,24 @@ class FrontController extends RootFrontController
         // dd($dataOrder);
         $imgageUrl = 'https://qr.sepay.vn/img?' . http_build_query([
             'acc' => sc_config('so_tai_khoan'),
-            'bank' => 'MB',
+            'bank' => sc_config('ten_ngan_hang'),
             'amount' =>  $dataOrder['total'],
             'des' => session('orderID'),
             'template' => 'compact',
+           
         ]);
         return view($pathPlugin.'::qr',
             [
                 'title' => sc_language_render($pathPlugin.'::Lang.info'),
                 'pathPlugin' => $pathPlugin,
                 'imageUrl' => $imgageUrl,
-                'orderId' => session('orderID')
+                'orderId' => session('orderID'),
+                'acc' => sc_config('so_tai_khoan'),
+                'bank' => sc_config('ten_ngan_hang'),
+                'chutaikhoan' => sc_config('chu_tai_khoan'),
+                'amount' =>  $dataOrder['total'],
+                'des' => session('orderID'),
+                 'error' => ""
             ]
         );
     }
