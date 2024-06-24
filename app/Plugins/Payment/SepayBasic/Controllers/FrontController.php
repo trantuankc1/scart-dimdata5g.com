@@ -8,6 +8,7 @@ use SCart\Core\Front\Controllers\ShopCartController;
 use SCart\Core\Front\Controllers\RootFrontController;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Session;
 class FrontController extends RootFrontController
 {
     public $plugin;
@@ -43,23 +44,25 @@ class FrontController extends RootFrontController
         }
         
     }
-    public function extractCode($content) {
-        // Sử dụng biểu thức chính quy để tìm chuỗi cần lấy
-        preg_match('/^\S+/', $content, $matches);
-        // Trả về kết quả nếu tìm thấy, ngược lại trả về null
-        return $matches[0] ?? null;
-    }
+ public function extractCode($content) {
+    // Sử dụng biểu thức chính quy để tìm chuỗi sau "BankAPINotify" cho đến khi gặp "FT", "Ma", "Mã" hoặc hết chuỗi
+    preg_match('/BankAPINotify\s+(.+?)(?=\sFT|\sMa|\sMã|$)/', $content, $matches);
+    // Trả về kết quả nếu tìm thấy, ngược lại trả về null
+    return trim($matches[1]) ?? null;
+}
+
 
     public function webhook(Request $request): Response{
        
-        $dataResponse = request()->all();
+         $dataResponse = request()->all();
 
-        $orderID = $this->extractCode( $dataResponse['content']);
-        $order = ShopOrder::find($this->convertFormat($orderID));
-
-       //dd();
-       if( $order['total'] ==  $dataResponse['transferAmount']){
-        ShopOrder::find($this->convertFormat($orderID))->update([
+        $orderID = $this->extractCode( $dataResponse['description']);
+       // dd(str_replace(" ","",$orderID));
+     
+        $order = ShopOrder::find($this->convertFormat(str_replace(" ","",$orderID)));
+         
+     // dd( $order);
+        ShopOrder::find($this->convertFormat(str_replace(" ","",$orderID)))->update([
             'transaction' => $dataResponse['content'], 
             'status' => sc_config('sepay_order_status_success', 2),
             'payment_status' => sc_config('sepay_payment_status', 3)
@@ -74,19 +77,18 @@ class FrontController extends RootFrontController
         ];
         (new ShopOrder)->addOrderHistory($dataHistory);
         (new ShopCartController)->completeOrder();
+        Session::forget('orderID');
+         //Session::forget('dataOrder');
         //Complete order
         // redirect(sc_route('order.success'));
         return response('ok');
-       }else{
-        return redirect(sc_route('sepay.sepayqr'))->with(['error' => "Vui lòng chuyển khoản đủ tiền"]);
-       }
-       
     }
 
     public function checkorder(Request $request){
         $dataRequest = request()->all();
         $orderID = $dataRequest['orderId'];
        $order =  ShopOrder::find($orderID);
+       
        $data = ['status' => $order['status']];
        return response()->json($data);
        // dd($order);

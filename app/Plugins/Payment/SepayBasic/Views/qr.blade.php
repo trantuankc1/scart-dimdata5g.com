@@ -6,7 +6,7 @@
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        max-width: 600px;
+        max-width: 750px;
         margin: auto;
     }
 
@@ -178,7 +178,7 @@
                 </table>
 
                 <div class="alert alert-warning">
-                    <p>Vui lòng giữ nguyên nội dung chuyển khoản (Qúy khách có thể bỏ dấu - để xử lý chuyển khoản thủ công một cách thuận tiện) <strong class="text-danger">{{ $des }}</strong> và nhập đúng số tiền <strong class="text-danger">{{ $formattedOrderAmount }}</strong> để được xác nhận thanh toán trực tuyến.</p>
+                    <p>Vui lòng giữ nguyên nội dung chuyển khoản <strong class="text-danger">{{ $des }}</strong> và nhập đúng số tiền <strong class="text-danger">{{ $formattedOrderAmount }}</strong> để được xác nhận thanh toán trực tuyến.</p>
                 </div>
 
              
