@@ -44,8 +44,56 @@ class FrontController extends RootFrontController
         }
         
     }
+    
+  function getSubstring($input) {
+    // Tìm vị trí của chuỗi "BankAPINotify " trong input
+    $startPos = strpos($input, "BankAPINotify ");
+    if ($startPos === false) {
+        return "Không tìm thấy chuỗi 'BankAPINotify'";
+    }
+
+    // Tính toán vị trí bắt đầu của chuỗi cần lấy
+    $startPos += strlen("BankAPINotify ");
+
+    // Lấy chuỗi còn lại sau "BankAPINotify "
+    $remainingString = substr($input, $startPos);
+
+    // Tìm vị trí của dấu chấm thứ ba
+    $dotCount = 0;
+    $dotPos = -1;
+    while ($dotCount < 3) {
+        $dotPos = strpos($remainingString, ".", $dotPos + 1);
+        if ($dotPos === false) {
+            break;
+        }
+        $dotCount++;
+    }
+
+    // Nếu tìm thấy đủ 3 dấu chấm
+    if ($dotCount == 3) {
+        // truong hop nay cho vcb
+        // Tính toán vị trí bắt đầu của chuỗi cần lấy sau dấu chấm thứ ba
+        $startPos = $dotPos + 1;
+
+        // Tìm vị trí của từ bắt đầu bằng chữ 'S'
+        $sPos = strpos($remainingString, "S", $startPos);
+        if ($sPos === false) {
+            return "Không tìm thấy chữ 'S' sau dấu chấm thứ ba";
+        }
+
+        // Lấy chuỗi từ vị trí dấu chấm thứ ba đến trước chữ 'S'
+        $result = substr($remainingString, $startPos, $sPos - $startPos);
+    } else {
+        // bank khac
+        // Nếu không đủ 3 dấu chấm, lấy 12 ký tự sau "BankAPINotify "
+        $result = substr(str_replace(" ","",$remainingString), 0, 11);
+    }
+
+    return trim($result);
+}
+    
  public function extractCode($content) {
-    // Sử dụng biểu thức chính quy để tìm chuỗi sau "BankAPINotify" cho đến khi gặp "FT", "Ma", "Mã" hoặc hết chuỗi
+      // Sử dụng biểu thức chính quy để tìm chuỗi sau "BankAPINotify" cho đến khi gặp "FT", "Ma", "Mã" hoặc hết chuỗi
     preg_match('/BankAPINotify\s+(.+?)(?=\sFT|\sMa|\sMã|$)/', $content, $matches);
     // Trả về kết quả nếu tìm thấy, ngược lại trả về null
     return trim($matches[1]) ?? null;
@@ -56,8 +104,9 @@ class FrontController extends RootFrontController
        
          $dataResponse = request()->all();
 
-        $orderID = $this->extractCode( $dataResponse['description']);
-       // dd(str_replace(" ","",$orderID));
+        $orderID = $this->getSubstring( $dataResponse['description']);
+       // dd($orderID);
+       
      
         $order = ShopOrder::find($this->convertFormat(str_replace(" ","",$orderID)));
          
@@ -114,7 +163,7 @@ class FrontController extends RootFrontController
             'acc' => sc_config('so_tai_khoan'),
             'bank' => sc_config('ten_ngan_hang'),
             'amount' =>  $dataOrder['total'],
-            'des' => session('orderID'),
+            'des' => session('orderID')."-".sc_config('tien_to_thanh_toan'),
             'template' => 'compact',
            
         ]);
@@ -128,7 +177,7 @@ class FrontController extends RootFrontController
                 'bank' => sc_config('ten_ngan_hang'),
                 'chutaikhoan' => sc_config('chu_tai_khoan'),
                 'amount' =>  $dataOrder['total'],
-                'des' => session('orderID'),
+                'des' => session('orderID')."-".sc_config('tien_to_thanh_toan'),
                  'error' => ""
             ]
         );

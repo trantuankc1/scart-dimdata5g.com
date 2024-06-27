@@ -201,7 +201,6 @@
                 fobCopyToClipboard(textToCopy);
             })
         })
-
     })
 
     let interval = null
