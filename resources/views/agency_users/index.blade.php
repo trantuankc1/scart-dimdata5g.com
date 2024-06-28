@@ -22,8 +22,10 @@
                             <td>{{ $agencyUser->id }}</td>
                             <td>{{ $agencyUser->username }}</td>
                             <td>{{ $agencyUser->email }}</td>
-                            @if($agencyUser->agency->level != null)
-                                <td>{{ $agencyUser->agency->level }}</td>
+                            @if($agencyUser->agency && $agencyUser->agency->level != null)
+                                {{ $agencyUser->agency->level }}
+                            @else
+                                N/A <!-- Display a default value if agency or level is null -->
                             @endif
                             <td>
                                 @foreach($agencyUser->commissions as $commission)
@@ -31,12 +33,16 @@
                                     <br> <!-- Thêm dòng mới sau mỗi tỉ lệ chiết khấu -->
                                 @endforeach
                             </td>
-                            <td><a href="{{ route('agency_users.edit', $agencyUser->id) }}" class="btn btn-info">sửa</a></td>
+                            <td><a href="{{ route('agency_users.edit', $agencyUser->id) }}" class="btn btn-info">sửa</a>
+                            </td>
                             <td>
-                                <form id="delete-form-{{ $agencyUser->id }}" action="{{ route('agency_users.destroy', $agencyUser->id) }}" method="post">
+                                <form id="delete-form-{{ $agencyUser->id }}"
+                                      action="{{ route('agency_users.destroy', $agencyUser->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-danger" id="delete-button-{{ $agencyUser->id }}" onclick="confirmDelete('{{ $agencyUser->id }}', event)">xóa</button>
+                                    <button class="btn btn-danger" id="delete-button-{{ $agencyUser->id }}"
+                                            onclick="confirmDelete('{{ $agencyUser->id }}', event)">xóa
+                                    </button>
                                 </form>
                             </td>
                         </tr>

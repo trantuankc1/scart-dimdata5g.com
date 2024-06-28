@@ -26,7 +26,11 @@
                 <tr class="text-uppercase">
                     <td>{{ $stt++ }}</td>
                     <td>{{ $request->agency_user_id }}</td>
-                    <td>{{ $request->agencyUser->username }}</td>
+                    <td>@if($request->agencyUser)
+                            {{ $request->agencyUser->username }}
+                        @else
+                            N/A <!-- Display a default value if agencyUser is null -->
+                        @endif</td>
                     <td>{{ $request->bank_name }}</td>
                     <td>{{ $request->name_account_owner }}</td>
                     <td>{{ $request->bank_account_number }}</td>

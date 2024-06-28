@@ -27,7 +27,12 @@
                 <tr>
                     <td>{{ $stt++ }}</td>
                     <td>{{ $infoOrder->agency_user_id }}</td>
-                    <td>{{ $infoOrder->agencyUser->username }}</td>
+                    <td>
+                        @if($infoOrder->agencyUser)
+                            {{ $infoOrder->agencyUser->username }}
+                        @else
+                            N/A <!-- Display a default value if agencyUser is null -->
+                        @endif</td>
                     <td>{{ $infoOrder->sim_type }}</td>
                     <td>{{ $infoOrder->quantity }}</td>
                     <td>{{ $infoOrder->delivery_address }}</td>
